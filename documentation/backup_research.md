@@ -1,6 +1,7 @@
 # Server Backup Research and Implementation Plan
 
 **Author:** Jayden Navarro
+
 **Purpose:** Describe what has been researched in regards to backing up the servers, and how we plan to implement it.
 
 ## Overview
