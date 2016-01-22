@@ -1,4 +1,15 @@
 # iLO Research Documentation
+
+Setting up iLO:
+
+https://www.youtube.com/watch?v=5KcDefkJP8s (Skip the first 10ish minutes)
+
+iLO WebUI Interface:
+
+https://www.youtube.com/watch?v=GuH9d-UQa2k (The last 3ish minutes are just OS stuff, skip it)
+
+
+
 #Getting Hewlett Packard Enterprise iLO up
 --
 1. Boot up the server and hit (F10) for the Intelligent Provisioning page when available. 
