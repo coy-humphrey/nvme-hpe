@@ -34,3 +34,14 @@ We plan to make a copy of the tnvme server OS file-tree from logical disk A (sda
 We may attempt to remove test files from sda, and try to perform a copy over from sdb to test the repair functionality.
 
 In the event of a failure that breaks the MBR, we can reinstall CentOS (thus creating a new MBR) and then restore the rest of our data with rsync.
+
+### Scripts
+
+	backup.sh
+	rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / /path/to/backup/folder
+
+This script is pulled from the [Arch Linux documentation for full system backups](https://wiki.archlinux.org/index.php/full_system_backup_with_rsync).
+
+The -aAX options ensure that ownership info, timestamps, and other important attributes are preserved.
+
+We exclude the contents of several directories whose contents are either automatically generated (dev, proc,...) or whose contents contain attached devices (mnt, media).
