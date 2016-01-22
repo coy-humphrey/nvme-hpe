@@ -35,6 +35,15 @@ We may attempt to remove test files from sda, and try to perform a copy over fro
 
 In the event of a failure that breaks the MBR, we can reinstall CentOS (thus creating a new MBR) and then restore the rest of our data with rsync.
 
+### Restoring a Broken System
+
+For a system with a working MBR that will not boot (perhaps from a broken kernel), an external .ISO will need to be used. An Arch Linux dvd makes a good choice for this, as it allows booting into a live environment and includes rsync.
+
+After booting into the live system, we will need to mount both the primary and backup drives. Our scripts assume that the backup drive is mounted to /mnt/backup. Assuming the backup partition is sdb1, this can be accomplished with the following command:
+
+	mkdir /mnt/backup
+	mount /dev/sdb1 /mnt/backup
+
 ### Scripts
 
 	backup.sh
