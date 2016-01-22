@@ -1,0 +1,3 @@
+# Server Setup Documentation
+
+Installing CentOS, stuff like that...
