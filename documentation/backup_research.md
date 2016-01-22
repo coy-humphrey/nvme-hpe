@@ -1,6 +1,6 @@
 # Server Backup Research and Implementation Plan
 
-**Author:** Jayden Navarro
+**Author:** Jayden Navarro, Coy Humphrey
 
 **Purpose:** Describe what has been researched in regards to backing up the servers, and how we plan to implement it.
 
@@ -32,3 +32,5 @@ We have found that rsync will most likely be more suitable for our needs. The pr
 We plan to make a copy of the tnvme server OS file-tree from logical disk A (sda) onto logical disk B (sdb) using rsync. Then we hope to check sdb for the contents, to ensure that the copy was made successfully.
 
 We may attempt to remove test files from sda, and try to perform a copy over from sdb to test the repair functionality.
+
+In the event of a failure that breaks the MBR, we can reinstall CentOS (thus creating a new MBR) and then restore the rest of our data with rsync.
