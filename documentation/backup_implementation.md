@@ -18,6 +18,8 @@ TODO: Coy, I'll let you fill this in
 
 TODO: Coy, I'll let you fill this in
 
+We mounted the drive to `/mnt/backup` ...
+
 ### Running Backup
 
 We simply ran `sudo ./backup.sh` on each server to perform the backup. If an initial backup has already taken place, only a copy of changed files will occur.
