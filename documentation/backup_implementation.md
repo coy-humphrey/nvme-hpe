@@ -6,7 +6,7 @@
 
 ## Overview
 
-We uses rsync to backup all important files on our main disk to a backup disk. We will now periodically run a backup script to perform a diff backup from our primary drive onto our secondary backup drive after important milestones.
+We used rsync to backup all important files on our main disk to a backup disk. We will now periodically run a backup script to perform a diff backup from our primary drive onto our secondary backup drive after important milestones.
 
 ## Implementation Steps
 
@@ -29,8 +29,7 @@ TODO: Jayden and/or Coy
 ### Scripts
 
 #### Backup Script (backup.sh)
-    rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","\
-/media/*","/lost+found"} / /mnt/backup
+    rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / /mnt/backup
 
 #### Repair Script (repair.sh)
 
