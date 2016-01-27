@@ -12,13 +12,13 @@ We used rsync to backup all important files on our main disk to a backup disk. W
 
 ### Formatting Backup Drive
 
-TODO: Coy, I'll let you fill this in
+We formatted our backup drive (sdb) as a single xfs partition. To do this, we ran `fdisk sdb` to create a new partition table as well as a single partition (sdb1) filling the entire disk.
+
+To format our newly created parition, we ran `mkfs -t xfs /sdb1`.
 
 ### Mounting Backup Drive
 
-TODO: Coy, I'll let you fill this in
-
-We mounted the drive to `/mnt/backup` ...
+Before running our backups, we mount the backup drive at /mnt/backup. The command to do this is `mount /dev/sdb1 /mnt/backup`.
 
 ### Running Backup
 
@@ -26,7 +26,18 @@ We simply ran `sudo ./backup.sh` on each server to perform the backup. If an ini
 
 ### Running Repair from Backup
 
-TODO: Jayden and/or Coy
+To restore the backup to a live system, run `sudo restore.sh`.
+
+If the system cannot be booted, boot from a live cd containing rsync (an Arch Linux live cd works well for this). Then mount sdb1 as /mnt/backup and sda1 as /mnt/root.
+
+	mkdir /mnt/backup
+	mkdir /mnt/root
+	mount /dev/sda1 /mnt/root
+	mount /dev/sdb1 /mnt/backup
+
+Once these partitions are mounted, run rsync from the backup to the root filesystem.
+
+	rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} /mnt/backup /tn/root
 
 ### Scripts
 
@@ -34,8 +45,7 @@ TODO: Jayden and/or Coy
     rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / /mnt/backup
 
 #### Repair Script (repair.sh)
-
-TODO: Coy
+	rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} /mnt/backup /
 
 ## Initial Implementation Notes
 
