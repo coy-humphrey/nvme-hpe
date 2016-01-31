@@ -6,6 +6,14 @@
 
 [CPU Frequency Governor Scaling](https://wiki.archlinux.org/index.php/CPU_frequency_scaling)
 
+## Notes
+
+Our Proliant servers are using the HP InfiniBand FDR/Ethernet 10Gb/40Gp 2-port 544+QSFP Adapter (764284-B21) which is base on the Mellanox ConnectX-3 Technology.
+
+Our Mellanox drivers are MLNX_OFED version is 3.1-1.1.0.1.
+
+This document contains information that specifically targets our driver and adapter technologies.
+
 ## Settings/Commands used
 
 #### BIOS Settings for Haswell Processors
@@ -41,8 +49,6 @@ In file `/etc/modprobe.d/mlnx.conf` set `options mlx4_core enable_sys_tune=1`.
 
 Where `<interface>` would be `ens3` and `ens3d1` for both snvme and tnvme.
 
-Only works on drivers MLNX_OFED-2.2-x.x.x or higher.
-
 #### Check Core Frequency is at maximum
 
 Check the supported maximum:
@@ -67,8 +73,6 @@ Where `<interface>` would be `ens3` and `ens3d1` for both snvme and tnvme.
 
 #### ConnectX Optimized Steering
 
-For MLNX_OFED-2.3-1.0.0 ConnectX-3/ConnectX-3 Pro adapter cards.
-
 In file `/etc/modprobe.d/mlnx.conf` edit `options mlx4_core log_num_mgm_entry_size=-7` and restart the Mellanox drivers.
 
 #### Single Thread Applications Environment Variables
@@ -76,10 +80,6 @@ In file `/etc/modprobe.d/mlnx.conf` edit `options mlx4_core log_num_mgm_entry_si
 For ConnextX-3 adapters:
 
     MLX4_SINGLE_THREADED=1
-
-For Connect-IB adapters:
-
-    MLX5_SINGLE_THREADED=1
 
 #### Performance Tuning for iSER (important!)
 
