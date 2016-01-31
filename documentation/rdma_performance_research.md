@@ -103,9 +103,8 @@ For Connect-IB adapters:
 
       # echo 3000 > /proc/sys/vm/nr_hugepages
 
-For kernel space targets such as LIO/SCST, decrease the number of persistent huge pages or set to zero.
+      For kernel space targets such as LIO/SCST, decrease the number of persistent huge pages or set to zero.
 
       # echo 0 > /proc/sys/vm/nr_hugepages
 
-7. Set the IRQ Affinity hints (see IRQ Affinity Hints (on page 14)).
-
+1. Set the IRQ Affinity hints (see IRQ Affinity Hints (on page 14)).
