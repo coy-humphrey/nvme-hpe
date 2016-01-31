@@ -85,15 +85,15 @@ For Connect-IB adapters:
 
 1. Set SCSI scheduler to noop:
 
-      # echo noop > /sys/block/<block_dev>/queue/scheduler
+            # echo noop > /sys/block/<block_dev>/queue/scheduler
 
 1. Disable the SCSI add_random:
 
-      # echo 0 > /sys/block/<block_dev>/queue/add_random
+            # echo 0 > /sys/block/<block_dev>/queue/add_random
 
 1. Disable IO merges:
 
-      # echo 2 > /sys/block/<block_dev>/queue/nomerges
+            # echo 2 > /sys/block/<block_dev>/queue/nomerges
 
 1. Disable the hyper-threading in BIOS configuration.
 
@@ -101,10 +101,10 @@ For Connect-IB adapters:
 
 1. Increase the number of persistent huge pages in the kernel's huge page pool for user_space targets such as TGT.
 
-      # echo 3000 > /proc/sys/vm/nr_hugepages
+            # echo 3000 > /proc/sys/vm/nr_hugepages
 
       For kernel space targets such as LIO/SCST, decrease the number of persistent huge pages or set to zero.
 
-      # echo 0 > /proc/sys/vm/nr_hugepages
+            # echo 0 > /proc/sys/vm/nr_hugepages
 
 1. Set the IRQ Affinity hints (see IRQ Affinity Hints (on page 14)).
