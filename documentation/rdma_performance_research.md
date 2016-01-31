@@ -107,5 +107,5 @@ For kernel space targets such as LIO/SCST, decrease the number of persistent hug
 
       # echo 0 > /proc/sys/vm/nr_hugepages
 
-1. Set the IRQ Affinity hints (see IRQ Affinity Hints (on page 14)).
+7. Set the IRQ Affinity hints (see IRQ Affinity Hints (on page 14)).
 
