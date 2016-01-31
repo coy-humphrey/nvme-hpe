@@ -10,7 +10,7 @@
 
 #### Setting CPU Frequency Governor to Performance
 
-     cpupower frequency-set -g performance
+     \# cpupower frequency-set -g performance
 
 #### Kernel Idle Loop Tuning (better latency)
 
