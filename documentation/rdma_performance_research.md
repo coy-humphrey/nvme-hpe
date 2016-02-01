@@ -8,9 +8,9 @@
 
 ## Notes
 
-Our Proliant servers are using the HP InfiniBand FDR/Ethernet 10Gb/40Gp 2-port 544+QSFP Adapter (764284-B21) which is base on the Mellanox ConnectX-3 Technology.
+Our Proliant servers are using the **HP InfiniBand FDR/Ethernet 10Gb/40Gp 2-port 544+QSFP Adapter (764284-B21)** which is based on the Mellanox **ConnectX-3** Technology.
 
-Our Mellanox drivers are MLNX_OFED version is 3.1-1.1.0.1.
+Our Mellanox driver is **MLNX_OFED version is 3.1-1.1.0.1**.
 
 This document contains information that specifically targets our driver and adapter technologies.
 
