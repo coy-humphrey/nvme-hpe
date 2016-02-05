@@ -54,3 +54,5 @@ This script is pulled from the [Arch Linux documentation for full system backups
 The -aAX options ensure that ownership info, timestamps, and other important attributes are preserved.
 
 We exclude the contents of several directories whose contents are either automatically generated (dev, proc,...) or whose contents contain attached devices (mnt, media).
+
+After the system backup, we unmount the backup drive to avoid accidentally breaking it using `umount /mnt/backup/`.
