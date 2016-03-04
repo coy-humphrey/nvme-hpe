@@ -2,7 +2,7 @@
 
 # START of variables to modify
 
-OUTFILE="results/ib_send_results.txt"
+OUTFILE="results/ib_send_bw_results.txt"
 
 INTF="tnvme40Gp1"
 MAIN_COMMAND="ib_send_bw $INTF --report_gbits"
