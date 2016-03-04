@@ -2,7 +2,7 @@
 
 # START of variables to modify
 
-IB_SEND_BW="ib_send_bw --report_gbits"
+MAIN_COMMAND="ib_send_bw --report_gbits"
 
 NUM_RUNS=20
 
@@ -10,7 +10,7 @@ NUM_RUNS=20
 
 COUNTER=0
 while [ $COUNTER -lt $NUM_RUNS ]; do
-    $IB_SEND_BW &> /dev/null
+    $MAIN_COMMAND &> /dev/null
 
     let COUNTER=COUNTER+1
 done
