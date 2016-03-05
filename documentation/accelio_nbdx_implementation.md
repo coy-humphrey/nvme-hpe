@@ -1,6 +1,6 @@
 # Accelio/nbdX Implementation Document
 
-## Installing Accelio (adpated from [Mellanox Documentation](https://community.mellanox.com/docs/DOC-2113))
+## Installing Accelio (adapted from [Mellanox Documentation](https://community.mellanox.com/docs/DOC-2113))
 
 ### Both Client and Server Side
 
@@ -31,7 +31,7 @@
 
 ### Notes
 
-#### If you need to reload the xio modules use the following command.
+#### If you need to reload the xio modules use the following commands:
 
 1. Unload modules: `modprobe -r xio_tcp; modprobe -r xio_rdma; modprobe -r xio_core`
 2. Load modules: `modprobe xio_rdma; modprobe xio_tcp` 
