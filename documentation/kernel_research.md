@@ -1,1 +1,0 @@
-# Kernel Upgrade Research Documentation
