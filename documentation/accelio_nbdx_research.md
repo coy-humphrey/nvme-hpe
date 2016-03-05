@@ -1,1 +1,0 @@
-# Accelio/nbdX Research Document
