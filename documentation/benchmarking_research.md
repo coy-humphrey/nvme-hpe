@@ -12,6 +12,7 @@
 * Automate the process of running static benchmarks such as the "ib_\*_\*" commands with varying parameters, and then output the results visually (graphs).
 * Run hard drive tests and block device tests. Compare the two.
 * Properly setup/teardown the block device on server/client sides to create environment to run tests on the block devices.
+* Framework should handle exceptions cleanly, so that other tests can continue if one fails, but it is noted in a log.
 
 ## Use Cases
 
