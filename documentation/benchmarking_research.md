@@ -10,7 +10,7 @@
 
 * Benchmark IOPS using our protocol stack.
 
-* Automate the process of running static benchmarks such as the "ib_*_*" commands with varying parameters, and then output the results visually (graphs).
+* Automate the process of running static benchmarks such as the "ib_\*_\*" commands with varying parameters, and then output the results visually (graphs).
 
 * Run hard drive tests and block device tests. Compare the two.
 
@@ -38,7 +38,7 @@ By looking at generic automation frameworks and articles about building automate
 
 1. Setup Environment
 
-  * Setting up the raio_server and the block device, etc. (Mlnx, DOC-1528) (not necessary for ib_*_*, but is for fio, bonnie++, etc.)
+  * Setting up the raio_server and the block device, etc. (Mlnx, DOC-1528) (not necessary for ib_\*_\*, but is for fio, bonnie++, etc.)
 
 2. Specify Command
 
@@ -97,9 +97,9 @@ File: `ib_send_bw.csv`
 
 ```
 Run Number,Command,-t,-bs,|,IOPS
-1,ib_send_bw,10,256,300
-2,ib_send_bw,10,256,302
-1,ib_send_bw,10,512,412
+1,ib_send_bw,10,256,|,300
+2,ib_send_bw,10,256,|,302
+1,ib_send_bw,10,512,|,412
 ...
 ```
 
