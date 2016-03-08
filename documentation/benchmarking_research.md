@@ -68,27 +68,37 @@ By looking at generic automation frameworks and articles about building automate
 File: `ib_send_bw.py`
 
 ```python
-framework = new Framework()
-
-framework.setupRaioEnv()
-framework.csvParser = new IbSendBwCsv()
-
-framework.command = "ib_send_bw"
-framework.numRuns = 3
-framework.params = [
-   ('-t', ['60', '120', '240']),
-   ('-bs', ['256', '512']),
-   ('--interface', ['tnvme40Gb1'])
-]
-framework.runBenchmarks()
-
-framework.teardownRaioEnv()
-
-framework.outputCSV()
+def run():
+  framework = new Framework()
+  
+  framework.setupRaioEnv()
+  framework.csvParser = new IbSendBwCsv()
+  
+  framework.command = "ib_send_bw"
+  framework.numRuns = 3
+  framework.params = [
+     ('-t', ['60', '120', '240']),
+     ('-bs', ['256', '512']),
+     ('--interface', ['tnvme40Gb1'])
+  ]
+  framework.runBenchmarks()
+  
+  framework.teardownRaioEnv()
+  
+  framework.outputCSV()
 
 class IbSendBwCsv(CsvParser):
    def parse():
        ...
+```
+
+File: `run_all.py`, setup as a cron job for overnight runs.
+
+```python
+import ib_send_bw
+
+ib_send_bw.run()
+...
 ```
 
 File: `ib_send_bw.csv`
