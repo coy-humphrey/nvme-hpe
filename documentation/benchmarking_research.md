@@ -9,11 +9,8 @@
 ## High Level Goals
 
 * Benchmark IOPS using our protocol stack.
-
 * Automate the process of running static benchmarks such as the "ib_\*_\*" commands with varying parameters, and then output the results visually (graphs).
-
 * Run hard drive tests and block device tests. Compare the two.
-
 * Properly setup/teardown the block device on server/client sides to create environment to run tests on the block devices.
 
 ## Use Cases
@@ -32,6 +29,7 @@ By looking at generic automation frameworks and articles about building automate
 ### Resources
 
 [javigon: automating fio tests with python](http://javigon.com/2015/04/28/automating-fio-tests-with-python/)
+
 [simpleprogrammer.com: test automation framework architecture](http://simpleprogrammer.com/2014/04/14/test-automation-framework-architecture/)
 
 ## Framework Outline
