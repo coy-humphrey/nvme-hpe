@@ -35,6 +35,7 @@ By looking at generic automation frameworks and articles about building automate
 ### General Framework
 
 * Provide environment setup/teardown (multiple environment types)
+* Networking between the Server/Client to synchronize start times and environment setups
 * Include variable for command and parameters
 * Include variable for number of times to execute each unique command
 * Include parser variable to parse the command output
