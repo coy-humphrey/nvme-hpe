@@ -37,8 +37,7 @@ By looking at generic automation frameworks and articles about building automate
 * Provide environment setup/teardown (multiple environment types)
 * Include variable for command and parameters
 * Include variable for number of times to execute each unique command
-* Provide CsvParser superclass which has the following functionality:
-  * TODO
+* Include parser variable to parse the command output
 
 ### Complex Tools Wrappers
 
@@ -86,10 +85,10 @@ File: `ib_send_bw.py`
 
 ```python
 def run():
-  framework = new Framework()
+  framework = Framework()
   
   framework.setupRaioEnv()
-  framework.csvParser = new IbSendBwCsv()
+  framework.outputParser = parse
   
   framework.command = "ib_send_bw"
   framework.numRuns = 3
@@ -104,9 +103,8 @@ def run():
   
   framework.outputCSV()
 
-class IbSendBwCsv(CsvParser):
-   def parse():
-       ...
+def parse():
+   ...
 ```
 
 File: `run_all.py`, setup as a cron job for overnight runs.
