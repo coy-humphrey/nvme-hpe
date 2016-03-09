@@ -22,7 +22,7 @@
 
 While there are many test automation frameworks out there, I haven't found any that deal specifically with benchmarking automation. I found one article that described how to automate one benchmarking tool (fio which we're actually going to use), but it didn't lay out an extensible framework.
 
-By looking at generic automation frameworks and articles about building automated frameworks, I have identified the key component to building a good automation framework: *have light tests, and a complex framework (rather than the other way around)*.
+By looking at generic automation frameworks and articles about building automated frameworks, I have identified the key component to building a good automation framework: **have light tests, and a complex framework (rather than the other way around)**.
 
 ### Resources
 
