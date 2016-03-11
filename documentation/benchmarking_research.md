@@ -13,6 +13,7 @@
 * Properly setup/teardown the block device on server/client sides to create environment to run tests on the block devices.
 * Framework should handle exceptions cleanly, so that other tests can continue if one fails, but it is noted in a log.
 * Create wrapper for more complex tools such as bonnie++ to properly handle its output and monitor the IOPS.
+* Gracefully handle synchronization between Client/Server.
 
 ## Use Cases
 
@@ -22,8 +23,9 @@
 
 * **Requirements:**
   1. Be able to specify command.
-  2. Be able to specify range of parameters...
-  3. TODO
+  2. Be able to specify range of parameters.
+  3. Be able to specify number of iterations per command.
+  4. Be able to provide way to parse the command output
 
 * **Basic Flow:**
   1. Create file using the name of the static benchmark and the extension '.py'; implement the below in the file.
@@ -37,6 +39,10 @@
 #### Use Case 2: Run static benchmarks
 
 * **Actor:** Developer.
+
+* **Requirements:**
+  1. Be able to run the benchmarks.
+  2. View the output in a nicely formatted CSV file.
 
 * **Basic Flow:**
   1. Execut the "run-all" script.
@@ -52,8 +58,12 @@
 
 * **Actor:** Developer.
 
+* **Requirements:**
+  1. Be able to run the benchmarks.
+  2. View the output in a nicely formatted file (probably CSV).
+
 * **Basic Flow:**
-  1. TODO
+  1. Execut the "run-all" script.
 
 #### Use Case 5: View benchmark results visually
 
