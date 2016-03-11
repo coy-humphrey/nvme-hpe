@@ -1,0 +1,12 @@
+Using uid:1002, gid:1000.
+Writing intelligently...done
+Rewriting...done
+Reading intelligently...done
+start 'em...done...done...done...done...done...
+Version  1.96       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+TEST           400G           195149  14 117179   8           291214  14 230.4  49
+Latency                        3031ms    3255ms             66101us     100ms
+
+1.96,1.96,TEST,1,1457504504,400G,,,,195149,14,117179,8,,,291214,14,230.4,49,,,,,,,,,,,,,,,,,,,3031ms,3255ms,,66101us,100ms,,,,,,
