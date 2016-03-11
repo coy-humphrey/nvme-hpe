@@ -20,6 +20,11 @@
 
 * **Actor:** Developer.
 
+* **Requirements:**
+  1. Be able to specify command.
+  2. Be able to specify range of parameters...
+  3. TODO
+
 * **Basic Flow:**
   1. Create file using the name of the static benchmark and the extension '.py'; implement the below in the file.
   2. Following the framework format, specify the command, parameters, and number of runs.
