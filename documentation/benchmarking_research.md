@@ -16,7 +16,46 @@
 
 ## Use Cases
 
+#### Use Case 1: Create static benchmarks
 
+* **Actor:** Developer.
+
+* **Basic Flow:**
+  1. Create file using the name of the static benchmark and the extension '.py'; implement the below in the file.
+  2. Following the framework format, specify the command, parameters, and number of runs.
+  3. Setup the proper environment required for the command (ex. Raio Server - Block Devices setup).
+  4. Create the output parser.
+  5. Run the test.
+  6. Teardown the environment.
+  7. Add the generated script into the "run-all" script.
+
+#### Use Case 2: Run static benchmarks
+
+* **Actor:** Developer.
+
+* **Basic Flow:**
+  1. Execut the "run-all" script.
+
+#### Use Case 3: Create complex benchmarks
+
+* **Actor:** Developer.
+
+* **Basic Flow:**
+  1. TODO
+
+#### Use Case 4: Run complex benchmarks
+
+* **Actor:** Developer.
+
+* **Basic Flow:**
+  1. TODO
+
+#### Use Case 5: View benchmark results visually
+
+* **Basic Flow:**
+
+* **Actor:** Project Sponsor.
+  1. View graphs from the benchmarking data.
 
 ## Existing Frameworks
 
