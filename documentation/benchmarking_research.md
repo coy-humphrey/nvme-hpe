@@ -1,15 +1,13 @@
 # Benchmarking Test and Framework Design Doc
 
-## What we need to do next in this doc...
-
-* Work on details of framework (csv parser inheritance superclass)
-* Figure out how bonnie++ and other complex tools can be integrated into framework, if necessary.
-
 ## High Level Goals
 
+* Benchmark card-to-card throughput.
 * Benchmark IOPS using our protocol stack.
-* Automate the process of running static benchmarks such as the "ib_\*_\*" commands with varying parameters, and then output the results as CSVs for easy graph generation in excel.
+* Benchmark sequential reads and writes, as well as random reads and writes.
 * Run hard drive tests and block device tests. Compare the two.
+
+* Automate the process of running static benchmarks such as the "ib_\*_\*" commands with varying parameters, and then output the results as CSVs (or JSON) for easy graph generation in excel (or programmatically in Python).
 * Properly setup/teardown the block device on server/client sides to create environment to run tests on the block devices.
 * Framework should handle exceptions cleanly, so that other tests can continue if one fails, but it is noted in a log.
 * Create wrapper for more complex tools such as bonnie++ to properly handle its output and monitor the IOPS.
@@ -17,7 +15,23 @@
 
 ## Use Cases
 
-#### Use Case 1: Create static benchmarks
+### Use Case 1: Benchmark different metrics (IOPS, bandwidth, latency,...)
+
+* **ACTOR:** Project Sponsor.
+
+* **Requirements:**
+  1. Use one or multiple tools to acquire results on the different metrics.
+  2. Vary parameters to gather a range of data on the different metrics.
+
+#### Use Case 2: View benchmark results visually
+
+* **Actor:** Project Sponsor.
+
+* **Requirements:**
+  1. View graphs from the benchmarking data.
+  2. Comment describing significance of each graph.
+
+#### Use Case 3: Create static benchmarks
 
 * **Actor:** Developer.
 
@@ -25,7 +39,7 @@
   1. Be able to specify command.
   2. Be able to specify range of parameters.
   3. Be able to specify number of iterations per command.
-  4. Be able to provide way to parse the command output
+  4. Be able to provide way to parse the command output.
 
 * **Basic Flow:**
   1. Create file using the name of the static benchmark and the extension '.py'; implement the below in the file.
@@ -36,7 +50,7 @@
   6. Teardown the environment.
   7. Add the generated script into the "run-all" script.
 
-#### Use Case 2: Run static benchmarks
+#### Use Case 4: Run static benchmarks
 
 * **Actor:** Developer.
 
@@ -47,14 +61,15 @@
 * **Basic Flow:**
   1. Execut the "run-all" script.
 
-#### Use Case 3: Create complex benchmarks
+<!---
+#### Use Case 5: Create complex benchmarks
 
 * **Actor:** Developer.
 
 * **Basic Flow:**
   1. TODO
 
-#### Use Case 4: Run complex benchmarks
+#### Use Case 6: Run complex benchmarks
 
 * **Actor:** Developer.
 
@@ -64,13 +79,45 @@
 
 * **Basic Flow:**
   1. Execut the "run-all" script.
+-->
 
-#### Use Case 5: View benchmark results visually
+## Benchmarking Tests
 
-* **Basic Flow:**
+#### ib_*_*
 
-* **Actor:** Project Sponsor.
-  1. View graphs from the benchmarking data.
+* **Purpose:** Establish card-to-card bandwidth and latency.
+
+* **Parameters:**
+  * **timeout (secs):** [5, 30, 60]
+  * **rx-depth (KB):** [256, 512, 1024]
+  * **tx-depth (KB):** [64, 128, 256]
+  * **size of message (B):** [32768, 65536, 131072]
+  * **iters:** [100, 500, 1000, 5000, 10000]
+
+#### FIO
+
+* **Purpose:** Establish bandwidth during block device reads/writes.
+
+* **Parameters:**
+  * **runtime (secs):** [600]
+  * **size (%):** [1%, 5%, 20%, 50%, 100%]
+  * **blocksize_range (B):** [1k-4k, 2k-8k]
+  * **numjobs:** [1, 20, 40]
+
+#### Bonnie++
+
+* **Purpose:** Test IO performance (metric unclear).
+
+* **Parameters:**
+  * **file size (default MB):** [512, 1G, 5G]
+  * **num tests:** [1, 3, 5]
+
+#### IOzone
+
+* **Purpose:** Benchmark IOPS during block device reads/writes.
+
+* **Parameters:**
+  * TODO
 
 ## Existing Frameworks
 
@@ -116,6 +163,7 @@ By looking at generic automation frameworks and articles about building automate
 3. **Specify Set of Parameters (iterate over all combinations)**
 
   * Number of runs = {3}, Timeout (sec) = {10,20,30,60}, Interface = {'tnvme40Gb1'}, Block Size (KB) = {256, 512, 1024}, etc.
+  * cpu jobs (-j utilizing cores), 
 
 4. **Capture Output**
 
@@ -180,9 +228,3 @@ Run Number,Command,-t,-bs,|,IOPS
 1,ib_send_bw,10,512,|,412
 ...
 ```
-
-* cpu jobs (-j utilizing cores), 
-
-## Benchmarking Tests
-
-fio, bonnie++, ... (add parameters as well)
