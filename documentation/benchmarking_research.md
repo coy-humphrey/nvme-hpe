@@ -1,12 +1,14 @@
 # Benchmarking Test and Framework Design Doc
 
-## High Level Goals
+## Goals
 
+### High Level Goals
 * Benchmark card-to-card throughput.
 * Benchmark IOPS using our protocol stack.
 * Benchmark sequential reads and writes, as well as random reads and writes.
 * Run hard drive tests and block device tests. Compare the two.
 
+### Low Level Goals
 * Automate the process of running static benchmarks such as the "ib_\*_\*" commands with varying parameters, and then output the results as CSVs (or JSON) for easy graph generation in excel (or programmatically in Python).
 * Properly setup/teardown the block device on server/client sides to create environment to run tests on the block devices.
 * Framework should handle exceptions cleanly, so that other tests can continue if one fails, but it is noted in a log.
@@ -17,7 +19,7 @@
 
 ### Use Case 1: Benchmark different metrics (IOPS, bandwidth, latency,...)
 
-* **ACTOR:** Project Sponsor.
+* **Actor:** Project Sponsor.
 
 * **Requirements:**
   1. Use one or multiple tools to acquire results on the different metrics.
@@ -83,7 +85,7 @@
 
 ## Benchmarking Tests
 
-#### ib_*_*
+#### ib_\*_\*
 
 * **Purpose:** Establish card-to-card bandwidth and latency.
 
