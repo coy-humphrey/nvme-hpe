@@ -1,5 +1,9 @@
 # Benchmarking Test and Framework Design Doc
 
+**Project:** NVMe over Fabrics
+**Project Sponsor:** Sam Fineberg, HPE
+**Authors:** Jayden Navarro, Eric Litvinsky, and Alice Yu
+
 ## Goals
 
 ### High Level Goals
