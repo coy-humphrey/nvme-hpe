@@ -119,7 +119,42 @@
 * **Purpose:** Benchmark IOPS during block device reads/writes.
 
 * **Parameters:**
-  * TODO
+  * **iozone -Ra (To generate graphs)**
+  * **iozone -a (Automatic mode)**
+  * **iozone -Ra -g 2G (To increase the max file size to 2GB)**
+  * **iozone -Ra -g 2G -i 0 -i l (To limit the testing to read/write)**
+  * **iozone -g # (To set the max file size in KB for auto mode)**
+  * **iozone -i # (Used to specify which test to run)**
+    * **0 = write/rewrite**
+    * **1 = read/re-read**
+    * **2 = random-read/write**
+    * **3 = Read-backwards**
+    * **4 = Re-write-record**
+    * **5 = stride-read**
+    * **6 = fwrite/re-fwrite**
+    * **7 = fread/Re-fread**
+    * **8 = random mix**
+    * **9 = pwrite/Re-pwrite**
+    * **10 = pread/Re-pread**
+    * **11 = pwritev/Re-pwritev**
+    * **12 = preadv/Rpreadv**
+  * **iozone -N (To report results in miscroseconds/operation)**
+  * **iozone -s #g (To specify the size in GB of the file to test)**
+  * **iozone -t # (To run Iozone in a throughput mode to allow the user to specify how many threads or processes to have active during the measurement.**
+  * **iozone -u # (To set the upper limit on the number of processes to run)**
+  * **iozone -V # (To specify a pattern that is to be written to the temporary file and validated for accuracy in each of the read tests)**
+  * **iozone -+t (Enables network performance test. Requires -+m.)**
+
+* **Metrics:**
+  * **Capacity utilization (in terms of percent/GB of space used)**
+  * **I/O per second (IOPS)**
+  * **Bandwidth**
+  * **Latency**
+  * **Access time (Read, Write, Random)**
+  * **Energy usage (From macro to micro)**
+  * **Mean time between failure (MTBF)**
+  * **Recovery point objective (RPO)**
+  * **Recovery time objective (RTO)**
 
 ## Existing Frameworks
 
