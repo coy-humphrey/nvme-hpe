@@ -37,7 +37,7 @@ class Framework:
             print(paramOutput)
          
    def generateParams(self):
-      param_list = [[[x[0], y] for y in x[1]] \
+      param_list = [[[x[0] + y] for y in x[1]] \
                     for x in self.params]
       self.allParams = [[self.command] + \
                         [z for y in x for z in y if z] \
