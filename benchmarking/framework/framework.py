@@ -1,5 +1,6 @@
 import subprocess
 import itertools
+import time
 
 class Framework:
    def __init__(self):
@@ -7,6 +8,7 @@ class Framework:
       self.command = None
       self.numRuns = 1
       self.params = None
+      self.isClient = True
       
       self.output = {}
       self.allParams = None
@@ -19,6 +21,8 @@ class Framework:
          for numRun in range(self.numRuns):
             self.output[paramString].append(
                subprocess.check_output(paramList))
+            if self.isClient:
+               time.sleep(0.5)
 
    def getParamString(self, paramList):
       return ' '.join(paramList)

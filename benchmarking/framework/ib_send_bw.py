@@ -6,6 +6,7 @@ def run_t():
    
    framework.command = "ib_send_bw"
    framework.numRuns = 3
+   framework.isClient = False
    framework.params = [
       ('-D', ['1', '3', '5']),
       ('-t', ['256', '512']),
@@ -19,6 +20,7 @@ def run_s():
    
    framework.command = "ib_send_bw"
    framework.numRuns = 3
+   framework.isClient = True
    framework.params = [
       ('tnvme40Gp1', ['']),
       ('-D', ['1', '3', '5']),
