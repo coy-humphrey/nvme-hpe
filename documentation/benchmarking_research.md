@@ -230,6 +230,8 @@ By looking at generic automation frameworks and articles about building automate
 File: `ib_send_bw.py`
 
 ```python
+from framework import Framework
+
 def run():
   framework = Framework()
   
