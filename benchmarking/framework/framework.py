@@ -19,10 +19,10 @@ class Framework:
          paramString = self.getParamString(paramList)
          self.output[paramString] = []
          for numRun in range(self.numRuns):
-            self.output[paramString].append(
-               subprocess.check_output(paramList))
             if self.isClient:
                time.sleep(0.5)
+            self.output[paramString].append(
+               subprocess.check_output(paramList))
 
    def getParamString(self, paramList):
       return ' '.join(paramList)
