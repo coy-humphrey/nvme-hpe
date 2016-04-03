@@ -102,6 +102,10 @@
   * **size of message (B):** [32768, 65536, 131072]
   * **iters:** [100, 500, 1000, 5000, 10000]
 
+* **Metrics:**
+  * **Bandwidth (Gb/s)**
+  * **Latency (ms)**
+
 #### FIO
 
 * **Purpose:** Establish bandwidth during block device reads/writes.
@@ -112,6 +116,9 @@
   * **blocksize_range (B):** [1k-4k, 2k-8k]
   * **numjobs:** [1, 20, 40]
 
+* **Metrics:**
+  * **Bandwidth (Gb/s)**
+
 #### Bonnie++
 
 * **Purpose:** Test IO performance (metric unclear).
@@ -119,6 +126,9 @@
 * **Parameters:**
   * **file size (default MB):** [512, 1G, 5G]
   * **num tests:** [1, 3, 5]
+
+* **Metrics:**
+  * Unclear
 
 #### IOzone
 
