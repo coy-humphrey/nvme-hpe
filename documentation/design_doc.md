@@ -5,7 +5,7 @@
 
 **Project Sponsor:** Sam Fineberg, HPE
 
-**Authors:** John Gemignani, Eric Litvinsky
+**Authors:** John Gemignani, Eric Litvinsky, Alice Yu
 
 ## Goals
 * Create a program that will write various amounts of data to a file.
@@ -24,7 +24,7 @@
   * type of test (-t)
   * nbdX device (-d)
   * semaphore (-s) [Pick between binary and text file]
-  * Check sum off (-c)
+  * checksum off (-c)
 
 ## Testing
   * Allocate a write and read buffer
