@@ -10,7 +10,7 @@ def run_t():
    framework.command = "ib_send_bw"
    framework.numRuns = 3
    framework.isClient = False
-   framework.outputParser = parse
+   framework.outputParser = parse_t
    framework.waitTime = 0.5
    framework.headerNames = ['Duration (-D)', 'TxDepth (-t)', 'Report GBits (--report_gbits)']
    framework.outputHeaders = outputHeaders_t
@@ -27,6 +27,7 @@ def run_s():
    
    framework.command = "ib_send_bw"
    framework.numRuns = 3
+   framework.outputParser = parse_s
    framework.isClient = True
    framework.params = [
       ('tnvme40Gp1', ['']),
