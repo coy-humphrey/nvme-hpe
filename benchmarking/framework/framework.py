@@ -10,6 +10,7 @@ class Framework:
       self.numRuns = 1
       self.params = None
       self.headerNames = None
+      self.outputHeaders = None
       self.isClient = True
       self.waitTime = 0.5
       
@@ -20,15 +21,15 @@ class Framework:
       self.generateArgValues()
       with open(self.command + ('-s' if self.isClient else '-t') \
                 + '.csv', 'w') as csvfile:
-         writer = csv.DictWriter(csvfile, fieldnames=self.headerNames)
+         writer = csv.DictWriter(csvfile, fieldnames=\
+                                 (self.headerNames + self.outputHeaders))
          writer.writeheader()
          for paramList, argValuesList in \
              zip(self.allParams, self.allArgValues):
             for numRun in range(self.numRuns):
                if self.isClient:
                   time.sleep(self.waitTime)
-               #output = subprocess.check_output(paramList)
-               output = ''
+               output = subprocess.check_output(paramList)
                outputDict = self.outputParser(output)
                commandDict = self.generateCommandDict(argValuesList)
                combinedDict = outputDict.copy()
