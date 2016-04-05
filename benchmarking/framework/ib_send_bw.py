@@ -7,6 +7,8 @@ def run_t():
    framework.command = "ib_send_bw"
    framework.numRuns = 3
    framework.isClient = False
+   framework.outputParser = parse
+   framework.headerNames = ['Duration (-D)', 'TxDepth (-t)', 'Report GBits (--report_gbits)']
    framework.params = [
       ('-D', ['1', '3', '5']),
       ('-t', ['256', '512']),
@@ -29,6 +31,9 @@ def run_s():
    ]
    framework.runBenchmarks()
    framework.ppOutput()
+
+def parse(output):
+   return {}
 
 if __name__ == "__main__":
    if sys.argv[1] == '-t':
