@@ -14,5 +14,10 @@
 ## Available Resources
 
 ## Design
+* Generate random numbers and write them to file
+  * Can write to text or binary file
+* Generate checksum 
+  * Decide on how to do this
 
 ## Testing
+* Read in the generated file and verify the checksum
