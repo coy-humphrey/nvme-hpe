@@ -40,7 +40,7 @@ def run_s():
    framework.runBenchmarks() 
 
 def parse_t(output):
-   return {outputHeaders_t[0]: output}
+   return {outputHeaders_t[0]: float(output)}
 
 def parse_s(output):
    return {}

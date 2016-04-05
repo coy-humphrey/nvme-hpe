@@ -29,6 +29,7 @@ class Framework:
             for numRun in range(self.numRuns):
                if self.isClient:
                   time.sleep(self.waitTime)
+               print('Running: ' + ' '.join(paramList))
                output = subprocess.check_output(paramList)
                outputDict = self.outputParser(output)
                commandDict = self.generateCommandDict(argValuesList)
