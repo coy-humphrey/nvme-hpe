@@ -43,3 +43,12 @@ class Framework:
                         [z for y in x for z in y if z] \
                         for x in \
                         itertools.product(*param_list)]
+
+   def generateArgValues(self):
+      param_list = [[[x[0], y] for y in x[1]] \
+                    for x in self.params]
+      self.allArgValues =  [ [y[1] for y in x ] \
+                        for x in itertools.product(*param_list)]
+
+   def getCsvHeader(self):
+      return [x[0] for x in self.params]
