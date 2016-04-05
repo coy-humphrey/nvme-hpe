@@ -1,6 +1,7 @@
 import subprocess
 import itertools
 import time
+import csv
 
 class Framework:
    def __init__(self):
@@ -8,24 +9,28 @@ class Framework:
       self.command = None
       self.numRuns = 1
       self.params = None
+      self.headerNames = None
       self.isClient = True
       
-      self.output = {}
       self.allParams = None
         
    def runBenchmarks(self):
       self.generateParams()
-      for paramList in self.allParams:
-         paramString = self.getParamString(paramList)
-         self.output[paramString] = []
-         for numRun in range(self.numRuns):
-            if self.isClient:
-               time.sleep(0.5)
-            self.output[paramString].append(
-               subprocess.check_output(paramList))
-
-   def getParamString(self, paramList):
-      return ' '.join(paramList)
+      self.generateArgValues()
+      with open(self.command + '.csv', 'w') as csvfile:
+         writer = csv.DictWriter(csvfile, fieldnames=self.headerNames)
+         writer.writeheader()
+         for paramList, argValuesList in \
+             zip(self.allParams, self.allArgValues):
+            for numRun in range(self.numRuns):
+               if self.isClient:
+                  time.sleep(0.5)
+               output = subprocess.check_output(paramList)
+               outputDict = self.outputParser(output)
+               commandDict = self.generateCommandDict(argValuesList)
+               combinedDict = outputDict.copy()
+               combinedDict.update(commandDict)
+               writer.writerow(combinedDict)
 
    # Pretty Print the Output
    def ppOutput(self):
@@ -35,7 +40,8 @@ class Framework:
          for index, paramOutput in enumerate(paramOutputs):
             print("ITERATION " + str(index+1) + ":")
             print(paramOutput)
-         
+      
+   # Create list of list commands: ex. [['echo','-t','hello']]
    def generateParams(self):
       param_list = [[[x[0] + y] for y in x[1]] \
                     for x in self.params]
@@ -52,3 +58,4 @@ class Framework:
 
    def getCsvHeader(self):
       return [x[0] for x in self.params]
+      
