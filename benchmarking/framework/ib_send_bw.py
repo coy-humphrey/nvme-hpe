@@ -15,7 +15,6 @@ def run_t():
       ('--report_gbits', [''])
    ]
    framework.runBenchmarks()
-   framework.ppOutput()
 
 def run_s():
    framework = Framework()
@@ -30,7 +29,6 @@ def run_s():
       ('--report_gbits', [''])
    ]
    framework.runBenchmarks()
-   framework.ppOutput()
 
 def parse(output):
    return {}
