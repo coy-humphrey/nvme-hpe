@@ -18,13 +18,15 @@
 ### Name of Command
   * nft (nbdX file test)
 
-### Parameters
+### Parameters (Note: we may need to use long names)
   * block size (-b)
   * file size (-f)
   * type of test (-t)
   * nbdX device (-d)
   * semaphore (-s) [Pick between binary and text file]
   * checksum off (-c)
+  * debug mode on (-d)
+  * verbose mode (-v)
 
 ## Testing
   * Allocate a write and read buffer
