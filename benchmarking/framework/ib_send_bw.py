@@ -28,6 +28,8 @@ def run_s():
    framework.command = "ib_send_bw"
    framework.numRuns = 3
    framework.outputParser = parse_s
+   framework.headerNames = ['Duration (-D)', 'TxDepth (-t)', 'Report GBits (--report_gbits)']
+   framework.outputHeaders = outputHeaders_s
    framework.isClient = True
    framework.params = [
       ('tnvme40Gp1', ['']),
@@ -38,7 +40,7 @@ def run_s():
    framework.runBenchmarks() 
 
 def parse_t(output):
-   return {outputHeader_t[0]: output}
+   return {outputHeaders_t[0]: output}
 
 def parse_s(output):
    return {}
