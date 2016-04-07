@@ -6,8 +6,8 @@ import subprocess
 import itertools
 import time
 import csv
-import os
 import sys
+import os
 
 class Framework:
    csvDirectory = None
