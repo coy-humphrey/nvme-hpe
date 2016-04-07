@@ -40,7 +40,7 @@ class Framework:
                if self.isClient:
                   time.sleep(self.waitTime)
                runString = 'Running: ' + \
-                           ' '.join(paramList)
+                           ' '.join(paramList) + '\n'
                print(runString)
                sys.stderr.write(runString)
                output = subprocess.check_output(paramList)
@@ -72,7 +72,7 @@ class Framework:
 def setDirectory():
    base_path = os.getcwd()
    t = time.localtime(time.time())
-   time_str = time.strftime("%Y-%m-%d-%Hh-%Mm-%Ss", t)
+   time_str = time.strftime("%Y-%m-%d-%Hh-%Mm", t)
    extended_path = os.path.join(base_path, "CSVs/" + time_str) + "/"
    error_path = os.path.join(base_path, "errors/" + time_str) + "/"
 
