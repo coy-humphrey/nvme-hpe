@@ -2,8 +2,11 @@ import subprocess
 import itertools
 import time
 import csv
+import os
 
 class Framework:
+   directory = None
+
    def __init__(self):
       self.outputParser = None
       self.command = None
@@ -59,3 +62,13 @@ class Framework:
    def getCsvHeader(self):
       return [x[0] for x in self.params]
       
+def setDirectory():
+   base_path = os.getcwd()
+   t = time.localtime(time.time())
+   time_str = time.strftime("%Y-%m-%d-%Hh-%Mm-%Ss", t)
+   extended_path = os.path.join(base_path, "CSV/" + time_str)
+
+   if not os.path.exists(extended_path):
+      os.makedirs(extended_path)
+
+   Framework.directory = extended_path
