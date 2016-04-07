@@ -19,15 +19,15 @@
   * nft (nbdX file test)
 
 ### Parameters (Note: we may need to use long names)
+  * help (-h)
+  * checksum off (-c)
+  * verbose mode (-v)
+  * debug mode on (-d)
   * block size (-b)
   * file size (-f)
   * type of test (-t)
-  * nbdX device (-d)
+  * nbdX device (-n)
   * semaphore (-s) [Pick between binary and text file]
-  * checksum off (-c)
-  * debug mode on (-d)
-  * verbose mode (-v)
-  * help (-h)
 
 ## Testing
   * Allocate a write and read buffer
