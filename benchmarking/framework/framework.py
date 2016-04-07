@@ -42,7 +42,7 @@ class Framework:
                runString = 'Running: ' + \
                            ' '.join(paramList) + '\n'
                print(runString)
-               sys.stderr.write(runString + '\n')
+               sys.stderr.write('\n' + runString)
                output = subprocess.check_output(paramList)
                outputDict = self.outputParser(output)
                commandDict = self.generateCommandDict(argValuesList)
