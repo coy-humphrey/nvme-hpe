@@ -5,7 +5,8 @@ import csv
 import os
 
 class Framework:
-   directory = None
+   csvDirectory = None
+   errorDirectory = None
 
    def __init__(self):
       self.outputParser = None
@@ -63,9 +64,14 @@ def setDirectory():
    base_path = os.getcwd()
    t = time.localtime(time.time())
    time_str = time.strftime("%Y-%m-%d-%Hh-%Mm-%Ss", t)
-   extended_path = os.path.join(base_path, "CSVs/" + time_str)
+   extended_path = os.path.join(base_path, "CSVs/" + time_str) + "/"
+   error_path = os.path.join(base_path, "errors/" + time_str) + "/"
 
    if not os.path.exists(extended_path):
       os.makedirs(extended_path)
 
-   Framework.directory = extended_path
+   if not os.path.exists(error_path):
+      os.makedirs(error_path)
+
+   Framework.csvDirectory = extended_path
+   Framework.errorDirectory = error_path
