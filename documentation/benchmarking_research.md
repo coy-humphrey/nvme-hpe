@@ -255,11 +255,10 @@ def run():
      ('-bs', ['256', '512']),
      ('--interface', ['tnvme40Gb1'])
   ]
+  # runs and outputs benchmarks
   framework.runBenchmarks()
   
   framework.teardownRaioEnv()
-  
-  framework.outputCSV()
 
 def parse():
    ...

@@ -5,14 +5,35 @@
 
 **Project Sponsor:** Sam Fineberg, HPE
 
-**Authors:** John Gemignani, Eric Litvinsky
+**Authors:** John Gemignani, Eric Litvinsky, Alice Yu
 
 ## Goals
-* Create a module that will write various amounts of data to a file.
-* Create another module that will verify the contents of the file after it has been transferred. 
-
-## Available Resources
+* Create a program that will read and write various amounts of data to a file.
+* Calculate a checksum on the block of data being written to file.
+* Write file to target server.
+* Read the file and compare calculated checksum block by block.
+* Generate metrics for successful file transfer.
 
 ## Design
+### Name of Command
+  * nft (nbdX file test)
+
+### Parameters (Note: we may need to use long names)
+  * block size (-b)
+  * file size (-f)
+  * type of test (-t)
+  * nbdX device (-d)
+  * semaphore (-s) [Pick between binary and text file]
+  * checksum off (-c)
+  * debug mode on (-d)
+  * verbose mode (-v)
 
 ## Testing
+  * Allocate a write and read buffer
+  * Fill buffer with random numbers [Different depending on writing to binary or text file]
+  * Calculate number of blocks to write
+  * Calculate checksum of write buffer
+
+## Generating Metrics
+  * Total time for opening and closing file for write/read
+  * Calculate minimum, maximum, and average for block transfers
