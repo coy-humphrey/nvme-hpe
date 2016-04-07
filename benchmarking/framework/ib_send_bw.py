@@ -1,3 +1,7 @@
+# Authors: Coy Humphrey, Jayden Navarro
+# Project: HPE UCSC Senior Design 2016
+# Date: 4-7-2016
+
 import sys
 from framework import Framework
 
