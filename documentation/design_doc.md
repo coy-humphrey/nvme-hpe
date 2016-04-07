@@ -9,10 +9,10 @@
 
 ## Goals
 * Create a program that will read and write various amounts of data to a file.
-* Calculate a checksum on the block of data being written to file.
-* Write file to target server.
+* Calculate a checksum on the block of data being written to a file.
+* Write the file to target server.
 * Read the file and compare calculated checksum block by block.
-* Generate metrics for successful file transfer.
+* Generate metrics for successful file transfers.
 
 ## Design
 ### Name of Command
@@ -27,6 +27,7 @@
   * checksum off (-c)
   * debug mode on (-d)
   * verbose mode (-v)
+  * help (-h)
 
 ## Testing
   * Allocate a write and read buffer
