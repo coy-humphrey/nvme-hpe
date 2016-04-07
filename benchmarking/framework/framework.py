@@ -7,6 +7,7 @@ import itertools
 import time
 import csv
 import os
+import sys
 
 class Framework:
    csvDirectory = None
@@ -38,7 +39,10 @@ class Framework:
             for numRun in range(self.numRuns):
                if self.isClient:
                   time.sleep(self.waitTime)
-               print('Running: ' + ' '.join(paramList))
+               runString = 'Running: ' + \
+                           ' '.join(paramList)
+               print(runString)
+               sys.stderr.write(runString)
                output = subprocess.check_output(paramList)
                outputDict = self.outputParser(output)
                commandDict = self.generateCommandDict(argValuesList)
