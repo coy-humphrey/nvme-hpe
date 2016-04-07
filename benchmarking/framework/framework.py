@@ -23,7 +23,7 @@ class Framework:
    def runBenchmarks(self):
       self.generateParams()
       self.generateArgValues()
-      with open(Framework.directory + self.command + \
+      with open(Framework.csvDirectory + self.command + \
                 ('-s' if self.isClient else '-t') \
                 + '.csv', 'w') as csvfile:
          writer = csv.DictWriter(csvfile, fieldnames=\

@@ -1,5 +1,5 @@
 import ib_send_bw
-from Framework import setDirectory
+from framework import setDirectory
 
 setDirectory()
 
