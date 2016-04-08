@@ -59,4 +59,4 @@ if __name__ == "__main__":
    elif sys.argv[1] == '-s':
       run_s()
    else:
-      print("Please specify -s or -t")
+      print("Please specify -t or -s")
