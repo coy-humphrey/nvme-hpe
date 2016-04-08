@@ -84,3 +84,23 @@ def setDirectory():
 
    Framework.csvDirectory = extended_path
    Framework.errorDirectory = error_path
+
+def setupLocalRamDisk():
+   diskName = 'local_ramdisk'
+   diskPath = '/mnt/' + diskName
+   diskSize = '64G'
+   subprocess.call(['sudo', 'mkdir', diskPath])
+   subprocess.call(['sudo', 'mount', '-t', 'tmpfs', '-o', \
+                    'size=' + diskSize, 'tmpfs', diskPath])
+
+def teardownLocalRamDisk():
+   diskName = 'local_ramdisk'
+   diskPath = '/mnt/' + diskName
+   subprocess.call(['sudo', 'umount', diskPath])
+   subprocess.call(['sudo', 'rmdir', diskPath])
+
+def setupRemoteRamDisk():
+   pass
+
+def teardownRemoteRamDisk():
+   pass
