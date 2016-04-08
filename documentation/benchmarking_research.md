@@ -12,7 +12,7 @@
 * Benchmark card-to-card throughput.
 * Benchmark IOPS using our protocol stack.
 * Benchmark sequential reads and writes, as well as random reads and writes.
-* Run hard drive tests and block device tests. Compare the two.
+* Run tests against local ramdisk and against network block device. Compare the results of the two.
 
 ### Low Level Goals
 * Automate the process of running static benchmarks such as the "ib_\*_\*" commands with varying parameters, and then output the results as CSVs (or JSON) for easy graph generation in excel (or programmatically in Python).
@@ -124,7 +124,7 @@
 * **Purpose:** Test IO performance (metric unclear).
 
 * **Parameters:**
-  * **file size (default MB):** [512, 1G, 5G]
+  * **file size (default MB):** [10G, 20G, 50G]
   * **num tests:** [1, 3, 5]
 
 * **Metrics:**
