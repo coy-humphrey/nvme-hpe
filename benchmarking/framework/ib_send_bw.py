@@ -6,6 +6,10 @@ import sys
 from framework import Framework
 
 def run_t():
+
+   def parse(output):
+      return {framework.outputHeaders[0]: float(output)}
+
    framework = Framework()
    
    framework.command = "ib_send_bw"
@@ -25,10 +29,12 @@ def run_t():
    ]
    framework.runBenchmarks()
 
+
+def run_s():
+
    def parse(output):
       return {framework.outputHeaders[0]: float(output)}
 
-def run_s():
    framework = Framework()
    
    framework.command = "ib_send_bw"
@@ -48,9 +54,6 @@ def run_s():
       ('--output=', ['bandwidth'])
    ]
    framework.runBenchmarks() 
-
-   def parse(output):
-      return {framework.outputHeaders[0]: float(output)}
 
 
 if __name__ == "__main__":
