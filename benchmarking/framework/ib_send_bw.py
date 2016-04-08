@@ -17,10 +17,10 @@ def run_t():
    framework.isClient = False
    framework.outputParser = parse
    framework.waitTime = 0.5
-   framework.headerNames = ['Duration (-D)', \
+   framework.headerNames = ['Duration in Seconds (-D)', \
                             'TxDepth (-t)', \
                             'Report GBits (--report_gbits)']
-   framework.outputHeaders = ['Gb/s']
+   framework.outputHeaders = ['Bandwidth in Gb/s']
    framework.params = [
       ('-D', ['1', '3', '5']),
       ('-t', ['256', '512']),
@@ -42,10 +42,10 @@ def run_s():
    framework.isClient = True
    framework.outputParser = parse
    framework.headerNames = ['Port (tnvme40Gp1)', \
-                            'Duration (-D)', \
+                            'Duration in Seconds (-D)', \
                             'TxDepth (-t)', \
                             'Report GBits (--report_gbits)']
-   framework.outputHeaders = ['Gb/s']
+   framework.outputHeaders = ['Bandwidth in Gb/s']
    framework.params = [
       ('tnvme40Gp1', ['']),
       ('-D', ['1', '3', '5']),
