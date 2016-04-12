@@ -3,7 +3,7 @@
 # Date: 4-7-2016
 
 import sys
-from framework import Framework
+from framework import Framework, setDirectory
 
 def run_t():
 
@@ -56,7 +56,7 @@ def run_s():
 
 
 if __name__ == "__main__":
-   Framework.setDirectory()
+   setDirectory()
 
    if sys.argv[1] == '-t':
       run_t()
