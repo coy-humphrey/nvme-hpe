@@ -3,7 +3,7 @@
 # Date: 4-7-2016
 
 import sys
-from framework import Framework
+from framework import Framework, setDirectory
 
 def run_t():
 
@@ -18,12 +18,12 @@ def run_t():
    framework.outputParser = parse
    framework.waitTime = 0.5
    framework.headerNames = ['Duration in Seconds (-D)', \
-                            'TxDepth (-t)', \
-                            'Report GBits (--report_gbits)']
+                            'TxDepth (-t)']
    framework.outputHeaders = ['Bandwidth in Gb/s']
    framework.params = [
       ('-D', ['1', '3', '5']),
       ('-t', ['256', '512']),
+      ('-R', ['']),
       ('--report_gbits', ['']),
       ('--output=', ['bandwidth'])
    ]
@@ -42,14 +42,13 @@ def run_s():
    framework.isClient = True
    framework.outputParser = parse
    framework.headerNames = ['Port (tnvme40Gp1)', \
-                            'Duration in Seconds (-D)', \
-                            'TxDepth (-t)', \
-                            'Report GBits (--report_gbits)']
+                            'Duration in Seconds (-D)']
    framework.outputHeaders = ['Bandwidth in Gb/s']
    framework.params = [
       ('tnvme40Gp1', ['']),
       ('-D', ['1', '3', '5']),
       ('-t', ['256', '512']),
+      ('-R', ['']),
       ('--report_gbits', ['']),
       ('--output=', ['bandwidth'])
    ]
@@ -57,6 +56,8 @@ def run_s():
 
 
 if __name__ == "__main__":
+   setDirectory()
+
    if sys.argv[1] == '-t':
       run_t()
    elif sys.argv[1] == '-s':

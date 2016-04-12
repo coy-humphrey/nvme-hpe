@@ -13,6 +13,8 @@ class Framework:
    csvDirectory = None
    errorDirectory = None
 
+   ramDiskPath = None
+
    def __init__(self):
       self.outputParser = None
       self.command = None
@@ -28,7 +30,8 @@ class Framework:
    def runBenchmarks(self):
       self.generateParams()
       self.generateArgValues()
-      with open(Framework.csvDirectory + self.command + \
+      baseName = os.path.basename(self.command)
+      with open(Framework.csvDirectory + baseName + \
                 ('-s' if self.isClient else '-t') \
                 + '.csv', 'w') as csvfile:
          writer = csv.DictWriter(csvfile, fieldnames=\
@@ -88,19 +91,27 @@ def setDirectory():
 def setupLocalRamDisk():
    diskName = 'local_ramdisk'
    diskPath = '/mnt/' + diskName
+   Framework.ramDiskPath = diskPath
    diskSize = '64G'
-   subprocess.call(['sudo', 'mkdir', diskPath])
+   #subprocess.call(['sudo', 'mkdir', diskPath])
    subprocess.call(['sudo', 'mount', '-t', 'tmpfs', '-o', \
                     'size=' + diskSize, 'tmpfs', diskPath])
 
 def teardownLocalRamDisk():
-   diskName = 'local_ramdisk'
-   diskPath = '/mnt/' + diskName
+   if not Framework.ramDiskPath: 
+      return
    subprocess.call(['sudo', 'umount', diskPath])
-   subprocess.call(['sudo', 'rmdir', diskPath])
+   #subprocess.call(['sudo', 'rmdir', diskPath])
+   Framework.ramDiskPath = None
 
 def setupRemoteRamDisk():
+   diskName = 'remote_ramdisk'
+   diskPath = '/mnt/' + diskName
+   Framework.ramDiskPath = diskPath
    pass
 
 def teardownRemoteRamDisk():
+   if not Framework.ramDiskPath: 
+      return
    pass
+   Framework.ramDiskPath = None
