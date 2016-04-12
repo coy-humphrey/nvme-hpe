@@ -54,13 +54,14 @@ void randFill(char * buffer, int bufferSize, int type) {
   }
   // default for type is a binary file
   for (i = 0; i < bufferSize; i++) {
-    if (type) {
+    if (type == BINARY) {
       randVal = (random() & BINARY_HIGH);
     }
     else {
       randVal = ASCII_LOW + (random() % (ASCII_HIGH - ASCII_LOW));
     }
     buffer[i] = randVal;
+    printf("%c", buffer[i]);
   }
 }
 
@@ -74,6 +75,7 @@ int main(int argc, char * argv[]){
    // set up some variables and flags for getopt
    int currentOption;
    char * programName;
+   char * buff;
 
    int checkSumFlag = TRUE; 
    int verboseFlag = FALSE;
@@ -135,11 +137,17 @@ int main(int argc, char * argv[]){
       }
    }
 
+/*
    // simple usage check, verify there is at least a file passed.
    // if not, exit on failure.
    if (argc == optind){
       usage();
    }
+*/
+
+   // Testing randFill()
+   randFill(buff, 128, TEXT);
+   printf("[%s]\n", &buff);
 
    // exit with success
    return SUCCESS;
