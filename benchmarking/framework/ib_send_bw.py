@@ -56,6 +56,8 @@ def run_s():
 
 
 if __name__ == "__main__":
+   Framework.setDirectory()
+
    if sys.argv[1] == '-t':
       run_t()
    elif sys.argv[1] == '-s':
