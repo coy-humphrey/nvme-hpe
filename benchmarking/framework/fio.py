@@ -5,55 +5,73 @@
 import sys
 from framework import Framework
 
-def run_t(diskPath):
+def run_t():
 
    def parse(output):
-      return {framework.outputHeaders[0]: float(output)}
+      #return {framework.outputHeaders[0]: float(output)}
+      return {}
 
    framework = Framework()
-   
-   framework.command = "ib_send_bw"
-   framework.numRuns = 3
    framework.isClient = False
    framework.outputParser = parse
    framework.waitTime = 0.5
+   
+   framework.command = "fio"
+   framework.numRuns = 1
    framework.headerNames = ['Duration in Seconds (-D)', \
                             'TxDepth (-t)', \
                             'Report GBits (--report_gbits)']
    framework.outputHeaders = ['Bandwidth in Gb/s']
    framework.params = [
-      ('-D', ['1', '3', '5']),
-      ('-t', ['256', '512']),
-      ('--report_gbits', ['']),
-      ('--output=', ['bandwidth'])
+      ('--rw=', ['read']),
+      ('--bs=', ['1k']),
+      ('--filename=', [Framework.ramDiskPath])
    ]
    framework.runBenchmarks()
 
 
-def run_s(diskPath):
+def run_s():
 
    def parse(output):
-      return {framework.outputHeaders[0]: float(output)}
+      #return {framework.outputHeaders[0]: float(output)}
+      return {}
 
    framework = Framework()
-   
-   framework.command = "ib_send_bw"
-   framework.numRuns = 3
-   framework.isClient = True
+   framework.isClient = False
    framework.outputParser = parse
-   framework.headerNames = ['Port (tnvme40Gp1)', \
-                            'Duration in Seconds (-D)', \
-                            'TxDepth (-t)', \
-                            'Report GBits (--report_gbits)']
+   framework.waitTime = 0.5
+   
+   framework.command = "/usr/local/bin/fio"
+   framework.numRuns = 1
+   #framework.headerNames = ['Duration in Seconds (-D)', \
+   #                         'TxDepth (-t)', \
+   #                         'Report GBits (--report_gbits)']
    framework.outputHeaders = ['Bandwidth in Gb/s']
+   # REMOVE BELOW
+   Framework.ramDiskPath = '/mnt/local_ramdisk'
    framework.params = [
-      ('tnvme40Gp1', ['']),
-      ('-D', ['1', '3', '5']),
-      ('-t', ['256', '512']),
-      ('--report_gbits', ['']),
-      ('--output=', ['bandwidth'])
+      ('--rw=', ['read']),
+      ('--bs=', ['1k']),
+      ('--numjobs=', ['1']),
+      ('--iodepth=', ['128']),
+      ('--runtime=', ['10']),
+      ('--time_based', ['']),
+      ('--loops=', ['1']),
+      ('--ioengine=', ['libaio']),
+      #('--direct=', ['1']),
+      #('--invalidate=', ['1']),
+      ('--minimal', ['']),
+      ('--fsync_on_close=', ['1']),
+      ('--randrepeat=', ['1']),
+      ('--norandommap', ['']),
+      ('--exitall', ['']),
+      ('--name=', ['task1']),
+      ('--size=', ['10M']),
+      ('--directory=', [Framework.ramDiskPath])
    ]
-   framework.runBenchmarks() 
+   framework.headerNames = [ x[0] for x in \
+                             framework.params]
+   framework.runBenchmarks()
 
 
 if __name__ == "__main__":
