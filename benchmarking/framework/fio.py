@@ -46,9 +46,9 @@ def run_local():
    ]
    framework.params = [
       ('--rw=', ['read']),
-      ('--bs=', ['1k']),
+      ('--bs=', ['1k', '4k', '8k', '1M', '10M']),
       ('--numjobs=', ['1']),
-      ('--iodepth=', ['128']),
+      ('--iodepth=', ['1', '4', '16', '64','128']),
       ('--runtime=', ['10']),
       ('--time_based', ['']),
       ('--loops=', ['1']),
@@ -59,7 +59,7 @@ def run_local():
       ('--norandommap', ['']),
       ('--exitall', ['']),
       ('--name=', ['task1']),
-      ('--size=', ['10M']),
+      ('--size=', ['10M', '100M', '5G', '10G', '50G']),
       ('--directory=', [Framework.ramDiskPath])
    ]
    framework.outputHeaders = [
