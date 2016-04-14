@@ -46,7 +46,23 @@ def run_s():
    #framework.headerNames = ['Duration in Seconds (-D)', \
    #                         'TxDepth (-t)', \
    #                         'Report GBits (--report_gbits)']
-   framework.outputHeaders = ['Bandwidth in Gb/s']
+   framework.outputHeaders = [
+      'IO Type',
+      'Blocksize',
+      'Number of Jobs',
+      'IO Depth', 
+      'Duration',
+      'Time Based',
+      'Number of Iterations',
+      'IO Engine',
+      'Minimal output',
+      'Fsync on close',
+      'Seed RNG for predictable runs',
+      'Exit all jobs after first finishes',
+      'Task name',
+      'Data size',
+      'Data Directory',
+   ]
    # REMOVE BELOW
    Framework.ramDiskPath = '/mnt/local_ramdisk'
    framework.params = [
@@ -69,15 +85,20 @@ def run_s():
       ('--size=', ['10M']),
       ('--directory=', [Framework.ramDiskPath])
    ]
-   framework.headerNames = [ x[0] for x in \
-                             framework.params]
+   # framework.headerNames = [ x[0] for x in \
+   #                          framework.params]
    framework.runBenchmarks()
 
 
 if __name__ == "__main__":
-   if sys.argv[1] == '-t':
-      run_t()
-   elif sys.argv[1] == '-s':
-      run_s()
-   else:
+   
+   if not (sys.argv[1] == '-t' or sys.argv[1] == '-s')
       print("Please specify -t or -s")
+      exit(1)
+
+   framework.setDirectory()
+   framework.setupLocalRamdisk()
+
+   run_s()
+
+   framework.teardownLocalRamDisk()
