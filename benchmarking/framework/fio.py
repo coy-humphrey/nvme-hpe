@@ -60,7 +60,7 @@ def run_local():
    framework.outputHeaders = []
    framework.runBenchmarks()
 
-def run_local():
+def run_remote():
 
    def parse(output):
       #return {framework.outputHeaders[0]: float(output)}
