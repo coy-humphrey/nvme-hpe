@@ -90,7 +90,7 @@ def run_s():
 
 if __name__ == "__main__":
    
-   if not (sys.argv[1] == '-t' or sys.argv[1] == '-s')
+   if not (sys.argv[1] == '-t' or sys.argv[1] == '-s'):
       print("Please specify -t or -s")
       exit(1)
 

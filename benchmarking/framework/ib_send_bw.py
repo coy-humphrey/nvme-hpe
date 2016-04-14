@@ -56,11 +56,14 @@ def run_s():
 
 
 if __name__ == "__main__":
-   setDirectory()
+
+   if not (sys.argv[1] == '-t' or sys.argv[1] == '-s')
+      print("Please specify -t or -s")
+      exit(1)
+
+   framework.setDirectory()
 
    if sys.argv[1] == '-t':
       run_t()
    elif sys.argv[1] == '-s':
       run_s()
-   else:
-      print("Please specify -t or -s")

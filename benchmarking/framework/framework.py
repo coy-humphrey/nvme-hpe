@@ -13,6 +13,8 @@ class Framework:
    csvDirectory = None
    errorDirectory = None
 
+   localRamDiskPath = '/mnt/local_ramdisk'
+   remoteRamDiskPath = '/mnt/remote_ramdisk'
    ramDiskPath = None
 
    def __init__(self):
@@ -89,11 +91,8 @@ def setDirectory():
    Framework.errorDirectory = error_path
 
 def setupLocalRamDisk():
-   diskName = 'local_ramdisk'
-   diskPath = '/mnt/' + diskName
-   Framework.ramDiskPath = diskPath
+   Framework.ramDiskPath = Framework.localRamDiskPath
    diskSize = '64G'
-   #subprocess.call(['sudo', 'mkdir', diskPath])
    subprocess.call(['sudo', 'mount', '-t', 'tmpfs', '-o', \
                     'size=' + diskSize, 'tmpfs', diskPath])
 
@@ -101,13 +100,10 @@ def teardownLocalRamDisk():
    if not Framework.ramDiskPath: 
       return
    subprocess.call(['sudo', 'umount', diskPath])
-   #subprocess.call(['sudo', 'rmdir', diskPath])
    Framework.ramDiskPath = None
 
 def setupRemoteRamDisk():
-   diskName = 'remote_ramdisk'
-   diskPath = '/mnt/' + diskName
-   Framework.ramDiskPath = diskPath
+   Framework.ramDiskPath = Framework.remoteRamDiskPath
    pass
 
 def teardownRemoteRamDisk():
