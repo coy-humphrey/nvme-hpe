@@ -7,7 +7,7 @@ from framework import Framework, setDirectory
 
 def run_t():
 
-   def parse(output):
+   def parse(output, headers):
       return {framework.outputHeaders[0]: float(output)}
 
    framework = Framework()
