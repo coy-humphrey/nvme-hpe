@@ -3,7 +3,9 @@
 # Date: 4-7-2016
 
 import sys
-from framework import Framework
+from framework import Framework, setDirectory, \
+   setupLocalRamDisk, teardownLocalRamDisk, \
+   setupRemoteRamDisk, teardownRemoteRamDisk
 
 def run_t():
 
@@ -94,9 +96,9 @@ if __name__ == "__main__":
       print("Please specify -t or -s")
       exit(1)
 
-   framework.setDirectory()
-   framework.setupLocalRamdisk()
+   setDirectory()
+   setupLocalRamdisk()
 
    run_s()
 
-   framework.teardownLocalRamDisk()
+   teardownLocalRamDisk()
