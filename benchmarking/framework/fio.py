@@ -43,10 +43,7 @@ def run_s():
    
    framework.command = "/usr/local/bin/fio"
    framework.numRuns = 1
-   #framework.headerNames = ['Duration in Seconds (-D)', \
-   #                         'TxDepth (-t)', \
-   #                         'Report GBits (--report_gbits)']
-   framework.outputHeaders = [
+   framework.headerNames= [
       'IO Type',
       'Blocksize',
       'Number of Jobs',
@@ -63,6 +60,7 @@ def run_s():
       'Data size',
       'Data Directory',
    ]
+   framework.outputHeaders = []
    # REMOVE BELOW
    Framework.ramDiskPath = '/mnt/local_ramdisk'
    framework.params = [
