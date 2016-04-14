@@ -90,6 +90,7 @@ def setDirectory():
    Framework.csvDirectory = extended_path
    Framework.errorDirectory = error_path
 
+# this should only be run on s side
 def setupLocalRamDisk():
    Framework.ramDiskPath = Framework.localRamDiskPath
    diskSize = '64G'
@@ -97,6 +98,7 @@ def setupLocalRamDisk():
                     'size=' + diskSize, 'tmpfs', 
                     Framework.ramDiskPath])
 
+# this should only be run on s side
 def teardownLocalRamDisk():
    if not Framework.ramDiskPath: 
       return
@@ -104,10 +106,12 @@ def teardownLocalRamDisk():
                     Framework.ramDiskPath])
    Framework.ramDiskPath = None
 
+# this should only be run on s side
 def setupRemoteRamDisk():
    Framework.ramDiskPath = Framework.remoteRamDiskPath
    pass
 
+# this should only be run on s side
 def teardownRemoteRamDisk():
    if not Framework.ramDiskPath: 
       return

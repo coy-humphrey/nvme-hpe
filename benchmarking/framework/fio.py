@@ -7,32 +7,7 @@ from framework import Framework, setDirectory, \
    setupLocalRamDisk, teardownLocalRamDisk, \
    setupRemoteRamDisk, teardownRemoteRamDisk
 
-def run_t():
-
-   def parse(output):
-      #return {framework.outputHeaders[0]: float(output)}
-      return {}
-
-   framework = Framework()
-   framework.isClient = False
-   framework.outputParser = parse
-   framework.waitTime = 0.5
-   
-   framework.command = "fio"
-   framework.numRuns = 1
-   framework.headerNames = ['Duration in Seconds (-D)', \
-                            'TxDepth (-t)', \
-                            'Report GBits (--report_gbits)']
-   framework.outputHeaders = ['Bandwidth in Gb/s']
-   framework.params = [
-      ('--rw=', ['read']),
-      ('--bs=', ['1k']),
-      ('--filename=', [Framework.ramDiskPath])
-   ]
-   framework.runBenchmarks()
-
-
-def run_s():
+def run():
 
    def parse(output):
       #return {framework.outputHeaders[0]: float(output)}
@@ -92,13 +67,20 @@ def run_s():
 
 if __name__ == "__main__":
    
-   if not (sys.argv[1] == '-t' or sys.argv[1] == '-s'):
-      print("Please specify -t or -s")
+   if not (sys.argv[1] in ['-l', '-r']):
+      print("Please specify -l or -r")
       exit(1)
 
    setDirectory()
-   setupLocalRamDisk()
 
-   run_s()
+   if sys.argv[1] == '-l':
+      setupLocalRamDisk()
+   if sys.argv[1] == '-r':
+      setupRemoteRamDisk()
 
-   teardownLocalRamDisk()
+   run()
+
+   if sys.argv[1] == '-l':
+      teardownLocalRamDisk()
+   if sys.argv[1] == '-r':
+      teardownRemoteRamDisk()
