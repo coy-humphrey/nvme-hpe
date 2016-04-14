@@ -109,11 +109,9 @@ def teardownLocalRamDisk():
 # this should only be run on s side
 def setupRemoteRamDisk():
    Framework.ramDiskPath = Framework.remoteRamDiskPath
-   pass
 
 # this should only be run on s side
 def teardownRemoteRamDisk():
    if not Framework.ramDiskPath: 
       return
-   pass
    Framework.ramDiskPath = None

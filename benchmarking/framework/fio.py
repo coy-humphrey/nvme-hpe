@@ -7,7 +7,60 @@ from framework import Framework, setDirectory, \
    setupLocalRamDisk, teardownLocalRamDisk, \
    setupRemoteRamDisk, teardownRemoteRamDisk
 
-def run():
+def run_local():
+
+   def parse(output):
+      #return {framework.outputHeaders[0]: float(output)}
+      print "here!"
+      print output
+      return {}
+
+   framework = Framework()
+   framework.isClient = False
+   framework.outputParser = parse
+   framework.waitTime = 0.5
+   
+   framework.command = "/usr/local/bin/fio"
+   framework.numRuns = 1
+   framework.headerNames= [
+      'IO Type',
+      'Blocksize',
+      'Number of Jobs',
+      'IO Depth', 
+      'Duration',
+      'Time Based',
+      'Number of Iterations',
+      'IO Engine',
+      'Minimal output',
+      'Fsync on close',
+      'Seed RNG for predictable runs',
+      'Exit all jobs after first finishes',
+      'Task name',
+      'Data size',
+      'Data Directory',
+   ]
+   framework.params = [
+      ('--rw=', ['read']),
+      ('--bs=', ['1k']),
+      ('--numjobs=', ['1']),
+      ('--iodepth=', ['128']),
+      ('--runtime=', ['10']),
+      ('--time_based', ['']),
+      ('--loops=', ['1']),
+      ('--ioengine=', ['libaio']),
+      ('--minimal', ['']),
+      ('--fsync_on_close=', ['1']),
+      ('--randrepeat=', ['1']),
+      ('--norandommap', ['']),
+      ('--exitall', ['']),
+      ('--name=', ['task1']),
+      ('--size=', ['10M']),
+      ('--directory=', [Framework.ramDiskPath])
+   ]
+   framework.outputHeaders = []
+   framework.runBenchmarks()
+
+def run_local():
 
    def parse(output):
       #return {framework.outputHeaders[0]: float(output)}
@@ -64,7 +117,6 @@ def run():
    #                          framework.params]
    framework.runBenchmarks()
 
-
 if __name__ == "__main__":
    
    if not (sys.argv[1] in ['-l', '-r']):
@@ -75,12 +127,10 @@ if __name__ == "__main__":
 
    if sys.argv[1] == '-l':
       setupLocalRamDisk()
+      run_local()
+      teardownLocalRamDisk()
+
    if sys.argv[1] == '-r':
       setupRemoteRamDisk()
-
-   run()
-
-   if sys.argv[1] == '-l':
-      teardownLocalRamDisk()
-   if sys.argv[1] == '-r':
+      run_remote()
       teardownRemoteRamDisk()
