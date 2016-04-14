@@ -93,13 +93,15 @@ def setDirectory():
 def setupLocalRamDisk():
    Framework.ramDiskPath = Framework.localRamDiskPath
    diskSize = '64G'
-   subprocess.call(['sudo', 'mount', '-t', 'tmpfs', '-o', \
-                    'size=' + diskSize, 'tmpfs', diskPath])
+   subprocess.call(['sudo', 'mount', '-t', 'tmpfs', '-o', 
+                    'size=' + diskSize, 'tmpfs', 
+                    Framework.ramDiskPath])
 
 def teardownLocalRamDisk():
    if not Framework.ramDiskPath: 
       return
-   subprocess.call(['sudo', 'umount', diskPath])
+   subprocess.call(['sudo', 'umount', 
+                    Framework.ramDiskPath])
    Framework.ramDiskPath = None
 
 def setupRemoteRamDisk():
