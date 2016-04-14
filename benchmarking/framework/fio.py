@@ -9,13 +9,18 @@ from framework import Framework, setDirectory, \
 
 def run_local():
 
-   def parse(output):
-      #return {framework.outputHeaders[0]: float(output)}
-      print "here!"
-      print output
-      return {}
+   def parse(output, headers):
+      pOutput = output.split(';')
+      outputIndices = [
+         49
+      ]
+      outputResults = [pOutput[index] for index in 
+                       outputIndices]
+      return dict(zip(framework.outputHeaders, 
+                      outputResults)
 
    framework = Framework()
+
    framework.isClient = False
    framework.outputParser = parse
    framework.waitTime = 0.5
@@ -57,7 +62,9 @@ def run_local():
       ('--size=', ['10M']),
       ('--directory=', [Framework.ramDiskPath])
    ]
-   framework.outputHeaders = []
+   framework.outputHeaders = [
+      'IOPS'
+   ]
    framework.runBenchmarks()
 
 def run_remote():

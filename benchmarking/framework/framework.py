@@ -49,7 +49,8 @@ class Framework:
                print(runString)
                sys.stderr.write('\n' + runString)
                output = subprocess.check_output(paramList)
-               outputDict = self.outputParser(output)
+               outputDict = self.outputParser(output, 
+                                              outputHeaders)
                commandDict = self.generateCommandDict(argValuesList)
                combinedDict = outputDict.copy()
                combinedDict.update(commandDict)
