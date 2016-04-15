@@ -10,6 +10,7 @@ import sys
 import os
 
 class Framework:
+   # Static variables meant to persist across runs
    csvDirectory = None
    errorDirectory = None
 
@@ -30,18 +31,23 @@ class Framework:
       self.allParams = None
         
    def runBenchmarks(self):
+      # Generate params to run
       self.generateParams()
+      # Values for each command, used for generating CSV
       self.generateArgValues()
       baseName = os.path.basename(self.command)
+      # Open CSV file in timestamped directory
       with open(Framework.csvDirectory + baseName + \
                 ('-s' if self.isClient else '-t') \
                 + '.csv', 'w') as csvfile:
          writer = csv.DictWriter(csvfile, fieldnames=\
                                  (self.headerNames + self.outputHeaders))
          writer.writeheader()
+         # Loop through the list of commands and list of argument values
          for paramList, argValuesList in \
              zip(self.allParams, self.allArgValues):
             for numRun in range(self.numRuns):
+               # If we're the client, wait for server to setup
                if self.isClient:
                   time.sleep(self.waitTime)
                runString = 'Running: ' + \
@@ -69,12 +75,14 @@ class Framework:
                         for x in \
                         itertools.product(*param_list)]
 
+   # The argument values to be put in the CSV file
    def generateArgValues(self):
       param_list = [[[x[0], y] for y in x[1]] \
                     for x in self.params]
       self.allArgValues =  [ [y[1] for y in x ] \
                         for x in itertools.product(*param_list)]
-      
+
+# Make this a static function in Framework?
 def setDirectory():
    base_path = os.getcwd()
    t = time.localtime(time.time())

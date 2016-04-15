@@ -12,7 +12,7 @@ def run_local():
    def parse(output, headers):
       pOutput = output.split(';')
       outputIndices = [
-         49
+         7, 48,
       ]
       outputResults = [pOutput[index] for index in 
                        outputIndices]
@@ -45,9 +45,9 @@ def run_local():
       'Data Directory',
    ]
    framework.params = [
-      ('--rw=', ['read']),
+      ('--rw=', ['read', 'write', 'randread', 'randwrite', 'rw', 'randrw']),
       ('--bs=', ['1k', '4k', '8k', '1M', '10M']),
-      ('--numjobs=', ['1']),
+      ('--numjobs=', ['1', '4', '8', '16']),
       ('--iodepth=', ['1', '4', '16', '64','128']),
       ('--runtime=', ['10']),
       ('--time_based', ['']),
@@ -59,11 +59,12 @@ def run_local():
       ('--norandommap', ['']),
       ('--exitall', ['']),
       ('--name=', ['task1']),
-      ('--size=', ['10M', '100M', '5G', '10G', '50G']),
+      ('--size=', ['50G']),
       ('--directory=', [Framework.ramDiskPath])
    ]
    framework.outputHeaders = [
-      'IOPS'
+      'Read IOPS',
+      'Write IOPS',
    ]
    framework.runBenchmarks()
 
@@ -101,23 +102,23 @@ def run_remote():
    # REMOVE BELOW
    Framework.ramDiskPath = '/mnt/local_ramdisk'
    framework.params = [
-      ('--rw=', ['read']),
-      ('--bs=', ['1k']),
-      ('--numjobs=', ['1']),
-      ('--iodepth=', ['128']),
+      ('--rw=', ['read', 'write', 'randread', 'randwrite', 'rw', 'randrw']),
+      ('--bs=', ['1k', '4k', '8k', '1M']),
+      ('--numjobs=', ['1', '4', '8', '16']),
+      ('--iodepth=', ['1', '4', '16', '64', '128']),
       ('--runtime=', ['10']),
       ('--time_based', ['']),
       ('--loops=', ['1']),
       ('--ioengine=', ['libaio']),
-      #('--direct=', ['1']),
-      #('--invalidate=', ['1']),
+      ('--direct=', ['1']),
+      ('--invalidate=', ['1']),
       ('--minimal', ['']),
       ('--fsync_on_close=', ['1']),
       ('--randrepeat=', ['1']),
       ('--norandommap', ['']),
       ('--exitall', ['']),
       ('--name=', ['task1']),
-      ('--size=', ['10M']),
+      ('--size=', ['50G']),
       ('--directory=', [Framework.ramDiskPath])
    ]
    # framework.headerNames = [ x[0] for x in \
