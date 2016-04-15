@@ -1,0 +1,15 @@
+IO Type,Blocksize,Number of Jobs,IO Depth,Duration,Time Based,Number of Iterations,IO Engine,Minimal output,Fsync on close,Seed RNG for predictable runs,No Random Map,Exit all jobs after first finishes,Task name,Data size,Data Directory,Read IOPS,Write IOPS
+read,1k,1,1,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,666856,0
+read,1k,1,4,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,651066,0
+read,1k,1,16,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,633013,0
+read,1k,1,64,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,620755,0
+read,1k,1,128,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,634840,0
+read,1k,4,1,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,600382,0
+read,1k,4,4,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,609781,0
+read,1k,4,16,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,591399,0
+read,1k,4,64,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,588181,0
+read,1k,4,128,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,579730,0
+read,1k,8,1,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,539486,0
+read,1k,8,4,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,541677,0
+read,1k,8,16,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,540767,0
+read,1k,8,64,10,,1,libaio,,1,1,,,task1,50G,/mnt/local_ramdisk,511341,0
