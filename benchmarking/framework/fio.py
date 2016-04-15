@@ -12,7 +12,7 @@ def run_local():
    def parse(output, headers):
       pOutput = output.split(';')
       outputIndices = [
-         49
+         7, 48,
       ]
       outputResults = [pOutput[index] for index in 
                        outputIndices]
@@ -63,7 +63,8 @@ def run_local():
       ('--directory=', [Framework.ramDiskPath])
    ]
    framework.outputHeaders = [
-      'IOPS'
+      'Read IOPS',
+      'Write IOPS',
    ]
    framework.runBenchmarks()
 
