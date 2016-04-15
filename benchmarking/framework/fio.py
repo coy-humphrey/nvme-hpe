@@ -16,8 +16,7 @@ def run_local():
       ]
       outputResults = [pOutput[index] for index in 
                        outputIndices]
-      return dict(zip(framework.outputHeaders, 
-                      outputResults)
+      return dict(zip(headers, outputResults))
 
    framework = Framework()
 
@@ -39,6 +38,7 @@ def run_local():
       'Minimal output',
       'Fsync on close',
       'Seed RNG for predictable runs',
+      'No Random Map',
       'Exit all jobs after first finishes',
       'Task name',
       'Data size',

@@ -19,6 +19,8 @@
 #include <errno.h>                     //error stuff
 #include <stdio.h>                     //*printf
 #include <stdlib.h>                    //exit
+#include <ctype.h>                     //toupper
+#include <stdint.h>		       //uint64_t
 
 // global status defines
 #define SUCCESS 0
@@ -41,16 +43,47 @@ void usage(){
    exit(FAILURE);
 }
 
-/* 
- *
- *
+uint64_t convertStringToSize(char* size) {
+  char * ptr = NULL;
+  uint64_t value = strtol(size, &ptr, 10);
+  if (strlen(ptr) != 1){
+    return 0;
+  }
+  
+  switch (toupper(*ptr)){
+    case 'B':
+      return value;
+    case 'K':
+      return 1024 * value;
+    case 'M':
+      return 1024*1024*value;
+    case 'G':
+      return 1024*1024*1024*value;  
+    default:
+      return 0;
+  }
+}
+
+int checkSum(char* buffer, int bufferSize) {
+  int i;
+  int checksum = 0;
+  for(i = 0; i < bufferSize; i++) {
+    checksum ^= buffer[i];
+  }
+
+  return checksum;
+}
+
+/* char* createRandFill(int bufferSize, int type)
+ * Creates a buffer specificed by user and fills it
+ * with random values depending on file type.
  */
-void randFill(char * buffer, int bufferSize, int type) {
+char* createRandFill(int bufferSize, int type) {
   int randVal, i;
-  buffer = malloc(bufferSize);
+  char* buffer = malloc(bufferSize);
   if (buffer == NULL) {
     fprintf(stderr, "Failed to allocate memory or bufferSize is 0");
-    exit(FAILURE);
+    return NULL;
   }
   // default for type is a binary file
   for (i = 0; i < bufferSize; i++) {
@@ -61,8 +94,10 @@ void randFill(char * buffer, int bufferSize, int type) {
       randVal = ASCII_LOW + (random() % (ASCII_HIGH - ASCII_LOW));
     }
     buffer[i] = randVal;
-    printf("%c", buffer[i]);
+    //printf("%c", buffer[i]);
   }
+
+  return buffer;
 }
 
 /* int main(int argc, char * argv[])
@@ -74,13 +109,16 @@ void randFill(char * buffer, int bufferSize, int type) {
 int main(int argc, char * argv[]){
    // set up some variables and flags for getopt
    int currentOption;
-   char * programName;
-   char * buff;
+   char* programName;
+   char* buff;
 
    int checkSumFlag = TRUE; 
    int verboseFlag = FALSE;
    int debugFlag = FALSE;
    int fileTypeFlag = BINARY;
+   int bufferSize = 0;
+   int fileSize = 0;
+   char* device = NULL;
 
    // set program name
    programName = basename(argv[0]);
@@ -113,6 +151,7 @@ int main(int argc, char * argv[]){
 
          case 'b':
             fprintf(stdout, "option -b passed with flag [%s]\n", optarg);
+            fprintf(stdout, "%lu\n", convertStringToSize(optarg));
             break;
          case 'f':
             fprintf(stdout, "option -f passed with flag [%s]\n", optarg);
@@ -146,8 +185,17 @@ int main(int argc, char * argv[]){
 */
 
    // Testing randFill()
-   randFill(buff, 128, TEXT);
-   printf("[%s]\n", &buff);
+   buff = createRandFill(256, TEXT);
+   printf("[%s]\n", buff);
+   int checksum = checkSum(buff, 256);
+   printf("checksum value: %d\n", checksum);
+   free(buff);
+
+   buff = createRandFill(256, TEXT);
+   printf("[%s]\n", buff);
+   checksum = checkSum(buff, 256);
+   printf("checksum value: %d\n", checksum);
+   free(buff);
 
    // exit with success
    return SUCCESS;
