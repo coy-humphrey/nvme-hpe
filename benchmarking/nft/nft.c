@@ -21,6 +21,9 @@
 #include <stdlib.h>                    //exit
 #include <ctype.h>                     //toupper
 #include <stdint.h>		       //uint64_t
+#include <sys/types.h>		       //file opening
+#include <sys/stat.h>		       //file opening
+#include <fcntl.h>		       //file opening
 
 // global status defines
 #define SUCCESS 0
@@ -43,6 +46,42 @@ void usage(){
    exit(FAILURE);
 }
 
+/* int fillFile(char* buffer, int bufferSize. int fileSize, int type)
+ * Fill binary or text file with data from buffer.
+ * Returns a 0 if file cannot be opened and 1 if successful.
+ */
+int fillFile(char* buffer, int bufferSize, int fileSize, int type) {
+  int openFile = 0;
+  int count = 0;
+
+  if(type == TEXT) {
+    openFile = open("test.txt", O_CREAT | O_WRONLY);
+  }
+  else {
+    openFile = open("test.bin", O_CREAT | O_WRONLY);
+  }
+
+  if (openFile == -1) {
+    fprintf(stdout, "Unable to create file.");
+    return 0;
+  }
+
+  for(count = 0; count < (fileSize / bufferSize); count++) {
+    write(openFile, buffer, bufferSize);
+  }
+
+  if((fileSize % bufferSize) != 0)
+    write(openFile, buffer, (fileSize % bufferSize));
+
+  close(openFile);
+  return 1;
+}
+
+/* uint64_t convertStringToSize(char* size)
+ * Converts the parsed file size or buffer size from
+ * the command line.
+ * Returns the size as an integer in bytes.
+ */
 uint64_t convertStringToSize(char* size) {
   char * ptr = NULL;
   uint64_t value = strtol(size, &ptr, 10);
@@ -64,6 +103,10 @@ uint64_t convertStringToSize(char* size) {
   }
 }
 
+/* int checkSum(char* buffer, int bufferSize)
+ * Calculate the checksum of the buffer contents.
+ * Returns the checksum.
+ */
 int checkSum(char* buffer, int bufferSize) {
   int i;
   int checksum = 0;
@@ -77,6 +120,7 @@ int checkSum(char* buffer, int bufferSize) {
 /* char* createRandFill(int bufferSize, int type)
  * Creates a buffer specificed by user and fills it
  * with random values depending on file type.
+ * Returns the buffer.
  */
 char* createRandFill(int bufferSize, int type) {
   int randVal, i;
@@ -116,8 +160,8 @@ int main(int argc, char * argv[]){
    int verboseFlag = FALSE;
    int debugFlag = FALSE;
    int fileTypeFlag = BINARY;
-   int bufferSize = 0;
-   int fileSize = 0;
+   int buffersize = 0;
+   int filesize = 0;
    char* device = NULL;
 
    // set program name
@@ -152,9 +196,11 @@ int main(int argc, char * argv[]){
          case 'b':
             fprintf(stdout, "option -b passed with flag [%s]\n", optarg);
             fprintf(stdout, "%lu\n", convertStringToSize(optarg));
+	    buffersize = convertStringToSize(optarg);
             break;
          case 'f':
             fprintf(stdout, "option -f passed with flag [%s]\n", optarg);
+            filesize = convertStringToSize(optarg);
             break;
          case 't':
             fprintf(stdout, "option -t passed with flag [%s]\n", optarg);
@@ -189,13 +235,10 @@ int main(int argc, char * argv[]){
    printf("[%s]\n", buff);
    int checksum = checkSum(buff, 256);
    printf("checksum value: %d\n", checksum);
+   int valid = fillFile(buff, buffersize, filesize, TEXT);
+   printf("valid: %d\n", valid);
    free(buff);
 
-   buff = createRandFill(256, TEXT);
-   printf("[%s]\n", buff);
-   checksum = checkSum(buff, 256);
-   printf("checksum value: %d\n", checksum);
-   free(buff);
 
    // exit with success
    return SUCCESS;
