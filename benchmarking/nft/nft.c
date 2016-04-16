@@ -55,10 +55,10 @@ int fillFile(char* buffer, int bufferSize, int fileSize, int type) {
   int count = 0;
 
   if(type == TEXT) {
-    openFile = open("test.txt", O_CREAT | O_WRONLY);
+    openFile = open("test.txt", O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
   }
   else {
-    openFile = open("test.bin", O_CREAT | O_WRONLY);
+    openFile = open("test.bin", O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
   }
 
   if (openFile == -1) {
