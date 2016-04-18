@@ -24,6 +24,7 @@
 #include <sys/types.h>		       //file opening
 #include <sys/stat.h>		       //file opening
 #include <fcntl.h>		       //file opening
+#include <zlib.h>		       //crc32
 
 // global status defines
 #define SUCCESS 0
@@ -103,11 +104,25 @@ uint64_t convertStringToSize(char* size) {
   }
 }
 
+/*
+ * checkSum function using zlib.h for crc32() function call
+ */
+uint32_t checkSum(char* buffer, int bufferSize) {
+  uint32_t crc = crc32(0L, Z_NULL, 0);
+  int count;
+
+  for(count = 0; count < bufferSize; count++) {
+    crc = crc32(crc, buffer, bufferSize);
+  }
+
+  return crc;
+}
+
 /* int checkSum(char* buffer, int bufferSize)
  * Calculate the checksum of the buffer contents.
  * Returns the checksum.
  */
-int checkSum(char* buffer, int bufferSize) {
+/*int checkSum(char* buffer, int bufferSize) {
   int i;
   int checksum = 0;
   for(i = 0; i < bufferSize; i++) {
@@ -116,7 +131,7 @@ int checkSum(char* buffer, int bufferSize) {
 
   return checksum;
 }
-
+*/
 /* char* createRandFill(int bufferSize, int type)
  * Creates a buffer specificed by user and fills it
  * with random values depending on file type.
@@ -130,7 +145,7 @@ char* createRandFill(int bufferSize, int type) {
     return NULL;
   }
   // default for type is a binary file
-  for (i = 0; i < bufferSize; i++) {
+  for (i = 0; i < (bufferSize); i++) {
     if (type == BINARY) {
       randVal = (random() & BINARY_HIGH);
     }
@@ -138,7 +153,6 @@ char* createRandFill(int bufferSize, int type) {
       randVal = ASCII_LOW + (random() % (ASCII_HIGH - ASCII_LOW));
     }
     buffer[i] = randVal;
-    //printf("%c", buffer[i]);
   }
 
   return buffer;
@@ -195,11 +209,12 @@ int main(int argc, char * argv[]){
 
          case 'b':
             fprintf(stdout, "option -b passed with flag [%s]\n", optarg);
-            fprintf(stdout, "%lu\n", convertStringToSize(optarg));
+            fprintf(stdout, "buffer size: %lu\n", convertStringToSize(optarg));
 	    buffersize = convertStringToSize(optarg);
             break;
          case 'f':
             fprintf(stdout, "option -f passed with flag [%s]\n", optarg);
+	    fprintf(stdout, "file size: %lu\n", convertStringToSize(optarg));
             filesize = convertStringToSize(optarg);
             break;
          case 't':
@@ -231,10 +246,10 @@ int main(int argc, char * argv[]){
 */
 
    // Testing randFill()
-   buff = createRandFill(256, TEXT);
-   printf("[%s]\n", buff);
-   int checksum = checkSum(buff, 256);
-   printf("checksum value: %d\n", checksum);
+   buff = createRandFill(buffersize, TEXT);
+   //printf("[%s]\n", buff);
+   uint32_t checksum = checkSum(buff, buffersize);
+   printf("checksum value: %lu\n", checksum);
    int valid = fillFile(buff, buffersize, filesize, TEXT);
    printf("valid: %d\n", valid);
    free(buff);
