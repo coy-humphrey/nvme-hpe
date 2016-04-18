@@ -24,10 +24,16 @@
   * verbose mode (-v)
   * debug mode on (-d)
   * block size (-b)
+    * User must specify size greater than zero in terms of bytes (b), kilabytes (k), megabytes (m), or gigabytes (g).
+    * Not case sensative
   * file size (-f)
+    * Same requirements as block size
   * type of test (-t)
+    * Random values
+    * Sequential values
   * nbdX device (-n)
   * semaphore (-s) [Pick between binary and text file]
+    * Binary file by default
 
 ## Testing
   * Allocate a write and read buffer
