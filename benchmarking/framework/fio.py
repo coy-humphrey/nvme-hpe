@@ -20,7 +20,7 @@ def run():
 
    framework = Framework()
 
-   framework.isClient = False
+   framework.isClient = True
    framework.outputParser = parse
    framework.waitTime = 0.5
    
@@ -83,7 +83,7 @@ if __name__ == "__main__":
       print("Please specify -l or -r")
       exit(1)
 
+   setDirectory()
    setup()
    run()
    teardown()
-   
