@@ -51,7 +51,7 @@ void usage(){
  * Fill binary or text file with data from buffer.
  * Returns a 0 if file cannot be opened and 1 if successful.
  */
-int fillFile(char* buffer, int bufferSize, int fileSize, int type) {
+int fillFile(char* buffer, uint64_t bufferSize, uint64_t fileSize, int type) {
   int openFile = 0;
   int count = 0;
 
@@ -107,7 +107,7 @@ uint64_t convertStringToSize(char* size) {
 /*
  * checkSum function using zlib.h for crc32() function call
  */
-uint32_t checkSum(char* buffer, int bufferSize) {
+uint32_t checkSum(char* buffer, uint64_t bufferSize) {
   uint32_t crc = crc32(0L, Z_NULL, 0);
   int count;
 
@@ -137,8 +137,9 @@ uint32_t checkSum(char* buffer, int bufferSize) {
  * with random values depending on file type.
  * Returns the buffer.
  */
-char* createRandFill(int bufferSize, int type) {
-  int randVal, i;
+char* createRandFill(uint64_t bufferSize, int type) {
+  int randVal;
+  uint64_t i;
   char* buffer = malloc(bufferSize);
   if (buffer == NULL) {
     fprintf(stderr, "Failed to allocate memory or bufferSize is 0");
@@ -174,8 +175,8 @@ int main(int argc, char * argv[]){
    int verboseFlag = FALSE;
    int debugFlag = FALSE;
    int fileTypeFlag = BINARY;
-   int buffersize = 0;
-   int filesize = 0;
+   uint64_t buffersize = 0;
+   uint64_t filesize = 0;
    char* device = NULL;
 
    // set program name
