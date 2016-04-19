@@ -107,31 +107,32 @@ uint64_t convertStringToSize(char* size) {
 /*
  * checkSum function using zlib.h for crc32() function call
  */
+/*
 uint32_t checkSum(char* buffer, uint64_t bufferSize) {
   uint32_t crc = crc32(0L, Z_NULL, 0);
-  int count;
+  uint64_t count;
 
   for(count = 0; count < bufferSize; count++) {
     crc = crc32(crc, buffer, bufferSize);
   }
-
+  printf("end222222222222");
   return crc;
 }
-
+*/
 /* int checkSum(char* buffer, int bufferSize)
  * Calculate the checksum of the buffer contents.
  * Returns the checksum.
  */
-/*int checkSum(char* buffer, int bufferSize) {
-  int i;
-  int checksum = 0;
+uint32_t checkSum(char* buffer, uint64_t bufferSize) {
+  uint64_t i;
+  uint32_t checksum = 0;
   for(i = 0; i < bufferSize; i++) {
     checksum ^= buffer[i];
   }
 
   return checksum;
 }
-*/
+
 /* char* createRandFill(int bufferSize, int type)
  * Creates a buffer specificed by user and fills it
  * with random values depending on file type.
@@ -145,8 +146,9 @@ char* createRandFill(uint64_t bufferSize, int type) {
     fprintf(stderr, "Failed to allocate memory or bufferSize is 0");
     return NULL;
   }
+  printf("buffer size: %lu\n", bufferSize);
   // default for type is a binary file
-  for (i = 0; i < (bufferSize); i++) {
+  for (i = 0; i < bufferSize; i++) {
     if (type == BINARY) {
       randVal = (random() & BINARY_HIGH);
     }
@@ -155,7 +157,7 @@ char* createRandFill(uint64_t bufferSize, int type) {
     }
     buffer[i] = randVal;
   }
-
+  printf("end\n");
   return buffer;
 }
 
