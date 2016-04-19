@@ -48,7 +48,7 @@ def run():
       ('--rw=', ['read', 'write', 'randread', 'randwrite', 'rw', 'randrw']),
       ('--bs=', ['1k', '4k', '8k', '1M', '10M']),
       ('--numjobs=', ['40']),
-      ('--iodepth=', ['1', '4', '16', '64','128']),
+      ('--iodepth=', ['1', '4', '16', '64', '128']),
       ('--size=', ['1G']),
       ('--runtime=', ['10']),    
       ('--ioengine=', ['libaio']),
@@ -72,7 +72,7 @@ def run():
 
 
 if __name__ == "__main__":
-   
+
    if sys.argv[1] == '-l':
       setup = setupLocalRamDisk
       teardown = teardownLocalRamDisk
@@ -86,3 +86,4 @@ if __name__ == "__main__":
    setup()
    run()
    teardown()
+   
