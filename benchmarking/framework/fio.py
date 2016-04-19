@@ -82,8 +82,8 @@ if __name__ == "__main__":
    else:
       print("Please specify -l or -r")
       exit(1)
+
    setDirectory()
    setup()
    run()
    teardown()
-   
