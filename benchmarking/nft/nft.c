@@ -104,6 +104,23 @@ void help() {
   exit(SUCCESS);
 }
 
+int write_all (int fd, char *buffer, uint64_t buffersize)
+{
+  uint64_t totalWrit = 0;
+  while (totalWrit < buffersize)
+  {
+    uint64_t toWrite = SSIZE_MAX < (buffersize-totalWrit) ? SSIZE_MAX : buffersize - totalWrit;
+    int rc = write(fd, buffer + totalWrit, toWrite);
+    if (rc < 0)
+    {
+      perror("nft");
+      return 1;
+    }
+    totalWrit += rc;
+  }
+  return 0;
+}
+
 /* uint32_t checkSum32(uint32_t crc, const void *buf, size_t size)
  * Calculate the checksum of the buffer contents.
  * Returns the checksum.
@@ -142,11 +159,11 @@ int fillFile(char* buffer, uint64_t bufferSize, uint64_t fileSize, int type) {
   }
 
   for(count = 0; count < (fileSize / bufferSize); count++) {
-    write(openFile, buffer, bufferSize);
+    write_all(openFile, buffer, bufferSize);
   }
   
   if((fileSize % bufferSize) != 0)
-    write(openFile, buffer, (fileSize % bufferSize));
+    write_all(openFile, buffer, (fileSize % bufferSize));
 
   close(openFile);
   return 1;
