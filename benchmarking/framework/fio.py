@@ -45,10 +45,12 @@ def run():
       # 'Data Directory',
    ]
    framework.params = [
-      ('--rw=', ['read', 'write', 'randread', 'randwrite', 'rw', 'randrw']),
-      ('--bs=', ['1k', '4k', '8k', '1M', '10M']),
+      ('--rw=', ['read', 'write', 'randread', 'rw', 'randrw']),
+      ('--bs=', ['1k', '4k', '8k', '1M']),
+      # -john ('--bs=', ['1k', '4k', '8k', '1M', '10M', '100M', '1G']),
       ('--numjobs=', ['40']),
-      ('--iodepth=', ['1', '4', '16', '64', '128']),
+      # -john ('--iodepth=', ['1', '4', '16', '64', '128']),
+      ('--iodepth=', ['1', '2']),
       ('--size=', ['1G']),
       ('--runtime=', ['10']),    
       ('--ioengine=', ['libaio']),
