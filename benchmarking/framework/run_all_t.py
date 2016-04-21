@@ -8,9 +8,3 @@ from framework import setDirectory
 setDirectory()
 
 ib_send_bw.run_t()
-
-setupLocalRamDisk()
-
-fio.run_t()
-
-teardownLocalRamDisk()
