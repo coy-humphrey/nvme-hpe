@@ -99,11 +99,14 @@ void usage(){
  * Print the available commands and how to use them.
  */
 void help() {
-  fprintf(stdout, "-b: Specify block size no greater than 2G followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
+  fprintf(stdout, "-b: Specify block size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
   fprintf(stdout, "-f: Specify file size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
   exit(SUCCESS);
 }
 
+/* int write_all(int fd, char *buffer, uint64_t buffersize)
+ * Allows for writing to files using buffer size larger than SSIZE_MAX (2G)
+ */
 int write_all (int fd, char *buffer, uint64_t buffersize)
 {
   uint64_t totalWrit = 0;
