@@ -5,12 +5,22 @@
 import ib_send_bw, fio
 from framework import *
 
+# Setup CSV and error directory
 setDirectory()
 
+# Run ib_send_bw
 ib_send_bw.run_s()
 
+# Run local fio tests
 setupLocalRamDisk()
 
-fio.run_s()
+fio.run()
 
 teardownLocalRamDisk()
+
+# Run remote fio tests
+setupRemoteRamDisk()
+
+fio.run()
+
+teardownRemoteRamDisk()
