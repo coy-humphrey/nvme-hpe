@@ -99,7 +99,7 @@ void usage(){
  * Print the available commands and how to use them.
  */
 void help() {
-  fprintf(stdout, "-b: Specify block size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
+  fprintf(stdout, "-b: Specify block size no greater than 2G followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
   fprintf(stdout, "-f: Specify file size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
   exit(SUCCESS);
 }
@@ -236,7 +236,7 @@ int main(int argc, char * argv[]){
    // as needed. On exit of the loop, the optind will point to the
    // file passed, if there was one passed.
    //while ((currentOption = getopt(argc, argv, "ly@:D:"))!= -1){
-   while ((currentOption = getopt(argc, argv, "hcvds:b:f:t:n:"))!= -1){
+   while ((currentOption = getopt(argc, argv, "hcvdsb:f:t:n:"))!= -1){
       switch(currentOption){
          case 'h':
             help();
@@ -306,7 +306,7 @@ int main(int argc, char * argv[]){
      uint32_t checksum = checkSum32(0, buff, buffersize);
      printf("checksum value: %lu\n", checksum);
    }
-   int valid = fillFile(buff, buffersize, filesize, TEXT);
+   int valid = fillFile(buff, buffersize, filesize, fileTypeFlag);
    printf("valid: %d\n", valid);
    free(buff);
 
