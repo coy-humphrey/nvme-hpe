@@ -89,9 +89,19 @@ static uint32_t crc32_tab[] = {
  * Print usage and exit with a failure
  */
 void usage(){
+   fprintf(stdout, "Invalid command \n");
    fprintf(stdout, "Usage: \n");
    fprintf(stdout, "       nft -h \n");
    exit(FAILURE);
+}
+
+/* void help()
+ * Print the available commands and how to use them.
+ */
+void help() {
+  fprintf(stdout, "-b: Specify block size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
+  fprintf(stdout, "-f: Specify file size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
+  exit(SUCCESS);
 }
 
 /* uint32_t checkSum32(uint32_t crc, const void *buf, size_t size)
@@ -177,11 +187,14 @@ char* createRandFill(uint64_t bufferSize, int type) {
   int randVal;
   uint64_t i;
   char* buffer = malloc(bufferSize);
-  if (buffer == NULL) {
-    fprintf(stderr, "Failed to allocate memory or bufferSize is 0");
-    return NULL;
+
+  if (bufferSize == 0) {
+    fprintf(stderr, "Failed to allocate memory or bufferSize is 0\n");
+    free(buffer);
+    exit(FAILURE);
   }
-  printf("buffer size: %lu\n", bufferSize);
+
+ // printf("buffer size: %lu\n", bufferSize);
   // default for type is a binary file
   for (i = 0; i < bufferSize; i++) {
     if (type == BINARY) {
@@ -211,7 +224,7 @@ int main(int argc, char * argv[]){
    int checkSumFlag = TRUE; 
    int verboseFlag = FALSE;
    int debugFlag = FALSE;
-   int fileTypeFlag = BINARY;
+   int fileTypeFlag = TEXT;
    uint64_t buffersize = 0;
    uint64_t filesize = 0;
    char* device = NULL;
@@ -226,7 +239,7 @@ int main(int argc, char * argv[]){
    while ((currentOption = getopt(argc, argv, "hcvds:b:f:t:n:"))!= -1){
       switch(currentOption){
          case 'h':
-            usage();
+            help();
             break;
          case 'c':
             fprintf(stdout, "option -c passed \n");
@@ -241,8 +254,8 @@ int main(int argc, char * argv[]){
             debugFlag = TRUE;
             break;
          case 's':
-            fprintf(stdout, "option -s passed with flag [%s]\n");
-            fileTypeFlag = TEXT;
+            fprintf(stdout, "option -s passed \n");
+            fileTypeFlag = BINARY;
             break;
 
          case 'b':
@@ -283,10 +296,16 @@ int main(int argc, char * argv[]){
    }
 */
 
+   if(!buffersize && !filesize)
+     usage();
+
    // Testing randFill()
-   buff = createRandFill(buffersize, TEXT);
-   uint32_t checksum = checkSum32(0, buff, buffersize);
-   printf("checksum value: %lu\n", checksum);
+   buff = createRandFill(buffersize, fileTypeFlag);
+
+   if(checkSumFlag) {
+     uint32_t checksum = checkSum32(0, buff, buffersize);
+     printf("checksum value: %lu\n", checksum);
+   }
    int valid = fillFile(buff, buffersize, filesize, TEXT);
    printf("valid: %d\n", valid);
    free(buff);
