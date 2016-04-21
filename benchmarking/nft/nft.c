@@ -236,7 +236,7 @@ int main(int argc, char * argv[]){
    // as needed. On exit of the loop, the optind will point to the
    // file passed, if there was one passed.
    //while ((currentOption = getopt(argc, argv, "ly@:D:"))!= -1){
-   while ((currentOption = getopt(argc, argv, "hcvds:b:f:t:n:"))!= -1){
+   while ((currentOption = getopt(argc, argv, "hcvdsb:f:t:n:"))!= -1){
       switch(currentOption){
          case 'h':
             help();
@@ -306,7 +306,7 @@ int main(int argc, char * argv[]){
      uint32_t checksum = checkSum32(0, buff, buffersize);
      printf("checksum value: %lu\n", checksum);
    }
-   int valid = fillFile(buff, buffersize, filesize, TEXT);
+   int valid = fillFile(buff, buffersize, filesize, fileTypeFlag);
    printf("valid: %d\n", valid);
    free(buff);
 
