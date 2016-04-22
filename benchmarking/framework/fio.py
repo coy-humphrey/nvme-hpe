@@ -45,8 +45,8 @@ def run():
       # 'Data Directory',
    ]
    framework.params = [
-      # -john ('--rw=', ['read', 'write', 'randread', 'randwrite', 'rw', 'randrw']),
-      ('--rw=', ['read', 'write', 'randread', 'rw']),
+      ('--rw=', ['read', 'write', 'randread', 'randwrite', 'rw', 'randrw']),
+      #('--rw=', ['read', 'write', 'randread', 'rw']),
       ('--bs=', ['1k', '4k', '8k', '1M']),
       # -john ('--bs=', ['1k', '4k', '8k', '1M', '10M', '100M', '1G']),
       #('--numjobs=', ['5']),
