@@ -22,7 +22,7 @@ def run():
 
    framework.isClient = True
    framework.outputParser = parse
-   framework.waitTime = 0.5
+   framework.waitTime = 3
    
    framework.command = "/usr/local/bin/fio"
    framework.numRuns = 1
@@ -45,13 +45,14 @@ def run():
       # 'Data Directory',
    ]
    framework.params = [
-      # - john ('--rw=', ['read', 'write', 'randread', 'randwrite', 'rw', 'randrw']),
+      # -john ('--rw=', ['read', 'write', 'randread', 'randwrite', 'rw', 'randrw']),
       ('--rw=', ['read', 'write', 'randread', 'rw']),
       ('--bs=', ['1k', '4k', '8k', '1M']),
       # -john ('--bs=', ['1k', '4k', '8k', '1M', '10M', '100M', '1G']),
+      #('--numjobs=', ['5']),
       ('--numjobs=', ['40']),
       # -john ('--iodepth=', ['1', '4', '16', '64', '128']),
-      ('--iodepth=', ['1', '2']),
+      ('--iodepth=', ['1']),
       ('--size=', ['1G']),
       ('--runtime=', ['10']),    
       ('--ioengine=', ['libaio']),
@@ -59,7 +60,7 @@ def run():
       ('--time_based', ['']),
       ('--loops=', ['1']),
       ('--minimal', ['']),
-      ('--fsync_on_close=', ['1']),
+      ('--fsync_on_close=', ['0']),
       ('--randrepeat=', ['1']),
       ('--norandommap', ['']),
       ('--exitall', ['']),
