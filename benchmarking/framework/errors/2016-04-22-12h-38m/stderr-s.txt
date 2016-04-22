@@ -1,0 +1,118 @@
+
+Running: ib_send_bw -D1 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2500.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D1 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D1 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2470.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D1 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2470.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D1 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D1 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D3 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D3 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D3 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D3 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2470.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D3 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D3 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D5 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D5 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2470.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D5 -t256 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D5 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D5 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2600.000000. CPU Frequency is not max.
+
+Running: ib_send_bw -D5 -t512 -R tnvme40Gp1 --report_gbits --output=bandwidth
+Conflicting CPU frequency values detected: 1200.000000 != 2470.000000. CPU Frequency is not max.
+
+Running: /usr/local/bin/fio --rw=read --bs=1k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=read --bs=4k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=read --bs=8k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=read --bs=1M --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=write --bs=1k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=write --bs=4k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=write --bs=8k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=write --bs=1M --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=randread --bs=1k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=randread --bs=4k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=randread --bs=8k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=randread --bs=1M --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=rw --bs=1k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=rw --bs=4k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=rw --bs=8k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=rw --bs=1M --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/local_ramdisk
+
+Running: /usr/local/bin/fio --rw=read --bs=1k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=read --bs=4k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=read --bs=8k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=read --bs=1M --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=write --bs=1k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=write --bs=4k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=write --bs=8k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=write --bs=1M --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=randread --bs=1k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=randread --bs=4k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=randread --bs=8k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=randread --bs=1M --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=rw --bs=1k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=rw --bs=4k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=rw --bs=8k --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
+
+Running: /usr/local/bin/fio --rw=rw --bs=1M --numjobs=40 --iodepth=1 --size=1G --runtime=10 --ioengine=libaio --time_based --loops=1 --minimal --fsync_on_close=0 --randrepeat=1 --norandommap --exitall --name=task1 --directory=/mnt/remote_ramdisk
