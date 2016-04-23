@@ -102,7 +102,7 @@ def setDirectory():
 # this should only be run on s side
 def setupLocalRamDisk():
    Framework.ramDiskPath = Framework.localRamDiskPath
-   diskSize = '64G'
+   diskSize = '90G'
    subprocess.call(['sudo', 'mount', '-t', 'tmpfs', '-o', 
                     'size=' + diskSize, 'tmpfs', 
                     Framework.ramDiskPath])

@@ -24,6 +24,7 @@ def run():
       framework.isClient = True
    else:
       framework.isClient = False
+
    framework.outputParser = parse
    framework.waitTime = 3
    
