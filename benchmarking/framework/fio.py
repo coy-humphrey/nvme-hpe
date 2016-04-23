@@ -20,7 +20,10 @@ def run():
 
    framework = Framework()
 
-   framework.isClient = True
+   if Framework.ramDiskPath == Framework.localRamDiskPath:
+      framework.isClient = True
+   else:
+      framework.isClient = False
    framework.outputParser = parse
    framework.waitTime = 3
    
