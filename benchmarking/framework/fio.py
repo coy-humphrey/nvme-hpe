@@ -12,7 +12,7 @@ def run():
    def parse(output, headers):
       pOutput = output.split(';')
       outputIndices = [
-         7, 48,
+         6, 7, 47, 48,
       ]
       outputResults = [pOutput[index] for index in 
                        outputIndices]
@@ -70,7 +70,9 @@ def run():
       ('--directory=', [Framework.ramDiskPath]),
    ]
    framework.outputHeaders = [
+      'Read Bandwidth (KB/s)',
       'Read IOPS',
+      'Write Bandwidth (KB/s)',
       'Write IOPS',
    ]
    framework.runBenchmarks()
