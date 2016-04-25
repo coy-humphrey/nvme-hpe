@@ -51,12 +51,12 @@ def run():
    framework.params = [
       ('--rw=', ['read', 'write', 'randread', 'randwrite', 
                  'rw', 'randrw']),
-      ('--bs=', ['1k', '4k', '8k', '1M', '10M', '100M', 
-                 '1G']),
+      #('--bs=', ['1k', '4k', '8k', '1M', '10M', '100M', '1G']),
+      ('--bs=', ['1k', '4k', '8k', '16k']),
       ('--numjobs=', ['40']),
-      ('--iodepth=', ['1', '2']),
+      ('--iodepth=', ['1', '2', '4', '8', '16', '32', '64']),
       ('--size=', ['2G']),
-      ('--runtime=', ['10']),    
+      ('--runtime=', ['300']),    
       ('--ioengine=', ['libaio']),
       # Lines below will not be outputted
       ('--time_based', ['']),
@@ -76,7 +76,6 @@ def run():
       'Write IOPS',
    ]
    framework.runBenchmarks()
-
 
 
 if __name__ == "__main__":
