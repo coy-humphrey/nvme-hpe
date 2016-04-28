@@ -12,7 +12,19 @@ def run():
    def parse(output, headers):
       pOutput = output.split(';')
       outputIndices = [
-         6, 7, 47, 48,
+         # Read Bandwidth
+         6, 
+         # Read IOPS
+         7, 
+         # Read Latency
+         37, 38, 39, 40, 
+
+         # Write Bandwidth
+         47, 
+         # Write IOPS
+         48, 
+         # Write Latency
+         78, 79, 80, 81,
       ]
       outputResults = [pOutput[index] for index in 
                        outputIndices]
@@ -72,8 +84,17 @@ def run():
    framework.outputHeaders = [
       'Read Bandwidth (KB/s)',
       'Read IOPS',
+      'Read Latency Min (ms)',
+      'Read Latency Max (ms)',
+      'Read Latency Avg (ms)',
+      'Read Latency Dev (ms)',
+
       'Write Bandwidth (KB/s)',
       'Write IOPS',
+      'Write Latency Min (ms)',
+      'Write Latency Max (ms)',
+      'Write Latency Avg (ms)',
+      'Write Latency Dev (ms)',
    ]
    framework.runBenchmarks()
 
