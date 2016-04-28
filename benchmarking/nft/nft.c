@@ -203,6 +203,8 @@ int fillFile(char* buffer, uint64_t bufferSize, uint64_t fileSize, int type, cha
     write_all(openFile, buffer, (fileSize % bufferSize));
 
   close(openFile);
+  free(path);
+
   return 1;
 }
 
@@ -319,7 +321,7 @@ int main(int argc, char * argv[]){
             filesize = convertStringToSize(optarg);
             break;
          case 'd':
-            fprintf(stdout, "option -t passed with flag [%s]\n", optarg);
+            fprintf(stdout, "option -d passed with flag [%s]\n", optarg);
 	    fprintf(stdout, "file path: %s\n", optarg);
 	    path = optarg;
             break;
