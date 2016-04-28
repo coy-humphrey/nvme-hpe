@@ -25,6 +25,7 @@
 #include <sys/stat.h>		       //file opening
 #include <fcntl.h>		       //file opening
 #include <sys/param.h>		       //crc32 (table version)
+#include <dirent.h>		       //opendir()
 
 // global status defines
 #define SUCCESS 0
@@ -37,6 +38,8 @@
 #define BINARY_HIGH 0xFF
 #define BINARY 0
 #define TEXT 1
+#define SEQUENTIAL 0
+#define RANDOM 1
 
 
 static uint32_t crc32_tab[] = {
@@ -99,9 +102,31 @@ void usage(){
  * Print the available commands and how to use them.
  */
 void help() {
+  fprintf(stdout, "-d: Specify directory path of where you want to save the file. \n");
   fprintf(stdout, "-b: Specify block size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
   fprintf(stdout, "-f: Specify file size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
   exit(SUCCESS);
+}
+
+/* int checkDir(char* dirPath)
+ * Checks to see if directory exists.
+ * Returns success or failure.
+ */
+int checkDir(char* dirPath) {
+  DIR* dir = opendir(dirPath);
+
+  if(dir) { //directory exists
+    closedir(dir);
+    return 1;
+  }
+  else if(ENOENT == errno) { //directory does not exist
+    return 0;
+  }
+  else if(EACCES == errno) { //permission denied to directory
+    return -1;
+  }
+  else //Couldn't open directory for some other reason
+    return -2;
 }
 
 /* int write_all(int fd, char *buffer, uint64_t buffersize)
@@ -145,19 +170,28 @@ uint32_t checkSum32(uint32_t crc, const void *buf, size_t size)
  * Fill binary or text file with data from buffer.
  * Returns a 0 if file cannot be opened and 1 if successful.
  */
-int fillFile(char* buffer, uint64_t bufferSize, uint64_t fileSize, int type) {
+int fillFile(char* buffer, uint64_t bufferSize, uint64_t fileSize, int type, char* dirPath) {
   int openFile = 0;
   uint64_t count = 0;
 
+  char* path;
+  char* textFile = "/test.txt";
+  char* binFile = "/test.bin";
+
   if(type == TEXT) {
-    openFile = open("test.txt", O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
+    asprintf(&path, "%s%s", dirPath, textFile);
+    openFile = open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
   }
   else {
-    openFile = open("test.bin", O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
+    asprintf(&path, "%s%s", dirPath, binFile);
+    openFile = open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
   }
 
+  fprintf(stdout, "path to directory: %s\n", dirPath);
+  fprintf(stdout, "path to file: %s\n", path);
+
   if (openFile == -1) {
-    fprintf(stdout, "Unable to create file.");
+    fprintf(stdout, "Unable to create file.\n");
     return 0;
   }
 
@@ -242,12 +276,12 @@ int main(int argc, char * argv[]){
    char* buff;
 
    int checkSumFlag = TRUE; 
-   int verboseFlag = FALSE;
    int debugFlag = FALSE;
-   int fileTypeFlag = TEXT;
+   int fileTypeFlag = BINARY;
+   int readWriteFlag = SEQUENTIAL;
    uint64_t buffersize = 0;
    uint64_t filesize = 0;
-   char* device = NULL;
+   char* path = NULL;
 
    // set program name
    programName = basename(argv[0]);
@@ -256,7 +290,7 @@ int main(int argc, char * argv[]){
    // as needed. On exit of the loop, the optind will point to the
    // file passed, if there was one passed.
    //while ((currentOption = getopt(argc, argv, "ly@:D:"))!= -1){
-   while ((currentOption = getopt(argc, argv, "hcvdsb:f:t:n:"))!= -1){
+   while ((currentOption = getopt(argc, argv, "hcrtb:f:d:"))!= -1){
       switch(currentOption){
          case 'h':
             help();
@@ -265,17 +299,13 @@ int main(int argc, char * argv[]){
             fprintf(stdout, "option -c passed \n");
             checkSumFlag = FALSE;
             break;
-         case 'v':
-            fprintf(stdout, "option -v passed \n");
-            verboseFlag = TRUE;
-            break;
-         case 'd':
-            fprintf(stdout, "option -d passed \n");
-            debugFlag = TRUE;
-            break;
-         case 's':
-            fprintf(stdout, "option -s passed \n");
-            fileTypeFlag = BINARY;
+	 case 'r':
+	    fprintf(stdout, "option -r passed \n");
+	    readWriteFlag = RANDOM;
+	    break;
+         case 't':
+            fprintf(stdout, "option -t passed \n");
+            fileTypeFlag = TEXT;
             break;
 
          case 'b':
@@ -288,11 +318,10 @@ int main(int argc, char * argv[]){
 	    fprintf(stdout, "file size: %lu\n", convertStringToSize(optarg));
             filesize = convertStringToSize(optarg);
             break;
-         case 't':
+         case 'd':
             fprintf(stdout, "option -t passed with flag [%s]\n", optarg);
-            break;
-         case 'n':
-            fprintf(stdout, "option -n passed with flag [%s]\n", optarg);
+	    fprintf(stdout, "file path: %s\n", optarg);
+	    path = optarg;
             break;
 
          case ':':
@@ -316,8 +345,20 @@ int main(int argc, char * argv[]){
    }
 */
 
-   if(!buffersize && !filesize)
+   fprintf(stdout, "file path: %s\n", optarg);
+
+   if(!buffersize || !filesize || (path == NULL))
      usage();
+
+   int dirCheck = 5; //Value not set by checkDir()
+   dirCheck = checkDir(path);
+
+   if(dirCheck)
+     printf("opendir value: %d\n", dirCheck);
+   else {
+     printf("opendir value: %d\n", dirCheck);
+     exit(FAILURE);
+   } 
 
    // Testing randFill()
    buff = createRandFill(buffersize, fileTypeFlag);
@@ -326,7 +367,7 @@ int main(int argc, char * argv[]){
      uint32_t checksum = checkSum32(0, buff, buffersize);
      printf("checksum value: %lu\n", checksum);
    }
-   int valid = fillFile(buff, buffersize, filesize, fileTypeFlag);
+   int valid = fillFile(buff, buffersize, filesize, fileTypeFlag, path);
    printf("valid: %d\n", valid);
    free(buff);
 
