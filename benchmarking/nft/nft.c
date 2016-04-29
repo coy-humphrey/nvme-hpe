@@ -108,25 +108,27 @@ void help() {
   exit(SUCCESS);
 }
 
-/* int checkDir(char* dirPath)
+/* void checkDir(char* dirPath)
  * Checks to see if directory exists.
- * Returns success or failure.
  */
-int checkDir(char* dirPath) {
+void checkDir(char* dirPath) {
   DIR* dir = opendir(dirPath);
 
   if(dir) { //directory exists
     closedir(dir);
-    return 1;
+    return;
   }
   else if(ENOENT == errno) { //directory does not exist
-    return 0;
+    fprintf(stdout, "Directory does not exist\n");
+    exit(FAILURE);
   }
   else if(EACCES == errno) { //permission denied to directory
-    return -1;
+    fprintf(stdout, "Permission denied to directory\n");
+    exit(FAILURE);
   }
   else //Couldn't open directory for some other reason
-    return -2;
+    fprintf(stdout, "Unable to open directory for some other reason\n");
+    exit(FAILURE);
 }
 
 /* int write_all(int fd, char *buffer, uint64_t buffersize)
@@ -347,20 +349,10 @@ int main(int argc, char * argv[]){
    }
 */
 
-   fprintf(stdout, "file path: %s\n", optarg);
-
    if(!buffersize || !filesize || (path == NULL))
      usage();
 
-   int dirCheck = 5; //Value not set by checkDir()
-   dirCheck = checkDir(path);
-
-   if(dirCheck)
-     printf("opendir value: %d\n", dirCheck);
-   else {
-     printf("opendir value: %d\n", dirCheck);
-     exit(FAILURE);
-   } 
+   checkDir(path);
 
    // Testing randFill()
    buff = createRandFill(buffersize, fileTypeFlag);
@@ -369,6 +361,7 @@ int main(int argc, char * argv[]){
      uint32_t checksum = checkSum32(0, buff, buffersize);
      printf("checksum value: %lu\n", checksum);
    }
+
    int valid = fillFile(buff, buffersize, filesize, fileTypeFlag, path);
    printf("valid: %d\n", valid);
    free(buff);
