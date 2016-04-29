@@ -21,25 +21,24 @@
 ### Parameters (Note: we may need to use long names)
   * help (-h)
   * checksum off (-c)
-  * verbose mode (-v)
-  * debug mode on (-d)
+  * directory (-d)
+    * Must specify the directory
   * block size (-b)
     * User must specify size greater than zero in terms of bytes (b), kilabytes (k), megabytes (m), or gigabytes (g).
     * Not case sensative
   * file size (-f)
     * Same requirements as block size
-  * type of test (-t)
-    * Random values
-    * Sequential values
-  * nbdX device (-n)
-  * semaphore (-s) [Pick between binary and text file]
+  * random reads and writes (-r)
+    * Sequential reads and writes (default)
+  * text file (-t) [Pick between binary and text file]
     * Binary file by default
 
 ## Testing
-  * Allocate a write and read buffer
+  * Allocate a buffer
   * Fill buffer with random numbers [Different depending on writing to binary or text file]
   * Calculate number of blocks to write
-  * Calculate checksum of write buffer
+  * Calculate checksum of buffer
+  * Write the calculated number of blocks to file
 
 ## Generating Metrics
   * Total time for opening and closing file for write/read
