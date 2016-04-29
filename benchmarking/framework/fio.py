@@ -25,6 +25,11 @@ def run():
          48, 
          # Write Latency
          78, 79, 80, 81,
+
+         # User CPU
+         87,
+         # System CPU
+         88,
       ]
       outputResults = [pOutput[index] for index in 
                        outputIndices]
@@ -95,6 +100,9 @@ def run():
       'Write Latency Max (ms)',
       'Write Latency Avg (ms)',
       'Write Latency Dev (ms)',
+
+      'CPU Usage: User',
+      'CPU Usage: System',
    ]
    framework.runBenchmarks()
 

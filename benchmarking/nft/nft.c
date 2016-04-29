@@ -126,9 +126,10 @@ void checkDir(char* dirPath) {
     fprintf(stdout, "Permission denied to directory\n");
     exit(FAILURE);
   }
-  else //Couldn't open directory for some other reason
+  else { //Couldn't open directory for some other reason
     fprintf(stdout, "Unable to open directory for some other reason\n");
     exit(FAILURE);
+  }
 }
 
 /* int write_all(int fd, char *buffer, uint64_t buffersize)
