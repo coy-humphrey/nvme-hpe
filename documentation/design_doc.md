@@ -24,7 +24,7 @@
   * directory (-d)
     * Must specify the directory
   * block size (-b)
-    * User must specify size greater than zero in terms of bytes (b), kilabytes (k), megabytes (m), or gigabytes (g).
+    * User must specify size greater than zero in terms of bytes (b), kilobytes (k), megabytes (m), or gigabytes (g).
     * Not case sensitive
   * file size (-f)
     * Same requirements as block size

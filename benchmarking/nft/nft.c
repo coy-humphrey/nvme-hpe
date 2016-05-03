@@ -169,6 +169,52 @@ uint32_t checkSum32(uint32_t crc, const void *buf, size_t size)
   return crc ^ ~0U;
 }
 
+/* uint32_t readCheckSum(uint64_t bufferSize, int type, char* dirPath)
+ * Reads in a block of data and returns the checksum on it.
+ * It is expected that the computed check sum of the block used to
+ * write to a file matches the check sum generated from reading in
+ * that same block from the file.
+ *
+ * The contents of the buffer continue to be written to the file
+ * according to the given size. Therefore, only necessary to verify
+ * that both buffer check sums match.
+ */
+uint32_t readCheckSum(uint64_t bufferSize, int type, char* dirPath) {
+  int openFile = 0;
+  int fileRead = 0;
+  uint64_t count = 0;
+  uint32_t checkSum = 0;
+  
+  char* path;
+  char* textFile = "/test.txt";
+  char* binFile = "/test.bin";
+
+  char* buffer = malloc(bufferSize);
+
+  if(type == TEXT) {
+    asprintf(&path, "%s%s", dirPath, textFile);
+    openFile = open(path, O_RDONLY);
+  }
+  else {
+    asprintf(&path, "%s%s", dirPath, binFile);
+    openFile = open(path, O_RDONLY);
+  }  
+
+  if (openFile == -1) {
+    fprintf(stdout, "Unable to open file.\n");
+    return 0;
+  }
+
+  fileRead = read(openFile, buffer, bufferSize);
+  checkSum = checkSum32(0, buffer, bufferSize);
+ 
+  free(buffer);
+  free(path);
+  close(openFile);
+
+  return checkSum;
+}
+
 /* int fillFile(char* buffer, int bufferSize. int fileSize, int type)
  * Fill binary or text file with data from buffer.
  * Returns a 0 if file cannot be opened and 1 if successful.
@@ -287,6 +333,7 @@ int main(int argc, char * argv[]){
    uint64_t buffersize = 0;
    uint64_t filesize = 0;
    char* path = NULL;
+   uint32_t writeCheckSum;
 
    // set program name
    programName = basename(argv[0]);
@@ -359,14 +406,16 @@ int main(int argc, char * argv[]){
    buff = createRandFill(buffersize, fileTypeFlag);
 
    if(checkSumFlag) {
-     uint32_t checksum = checkSum32(0, buff, buffersize);
-     printf("checksum value: %lu\n", checksum);
+     writeCheckSum = checkSum32(0, buff, buffersize);
+     printf("write checksum value: %lu\n", writeCheckSum);
    }
 
    int valid = fillFile(buff, buffersize, filesize, fileTypeFlag, path);
    printf("valid: %d\n", valid);
    free(buff);
 
+   uint32_t readchecksum = readCheckSum(buffersize, fileTypeFlag, path);
+   printf("read checksum value: %lu\n", readchecksum);
 
    // exit with success
    return SUCCESS;
