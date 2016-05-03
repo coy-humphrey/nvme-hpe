@@ -66,14 +66,14 @@ def run():
       # 'Data Directory',
    ]
    framework.params = [
-      ('--rw=', ['read', 'write', 'randread', 'randwrite', 
-                 'rw', 'randrw']),
+      ('--rw=', ['read', 'write', 'randread', 'randwrite', ]),
+                 #'rw', 'randrw']),
       #('--bs=', ['1k', '4k', '8k', '1M', '10M', '100M', '1G']),
-      ('--bs=', ['1k', '4k', '8k', '16k']),
+      ('--bs=', ['4k', '32k', '64k']),
       ('--numjobs=', ['1']),
-      ('--iodepth=', ['1']),
-      ('--size=', ['80G']),
-      ('--runtime=', ['300']),    
+      ('--iodepth=', ['1', '32', '64']),
+      ('--size=', ['40G']),
+      ('--runtime=', ['10']),    
       ('--ioengine=', ['libaio']),
       # Lines below will not be outputted
       ('--time_based', ['']),
@@ -84,6 +84,7 @@ def run():
       ('--norandommap', ['']),
       ('--exitall', ['']),
       ('--name=', ['task1']),
+      ('--direct=', ['1']),
       ('--directory=', [Framework.ramDiskPath]),
    ]
    framework.outputHeaders = [
