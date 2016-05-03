@@ -26,6 +26,7 @@
 #include <fcntl.h>		       //file opening
 #include <sys/param.h>		       //crc32 (table version)
 #include <dirent.h>		       //opendir()
+#include <getopt.h>		       //getopt_long
 
 // global status defines
 #define SUCCESS 0
@@ -314,6 +315,22 @@ char* createRandFill(uint64_t bufferSize, int type) {
   return buffer;
 }
 
+/* char* convertToUpper(char* str)
+ * Converts string to uppercase.
+ * Returns the uppercase version of the string.
+ */
+char* convertToUpper(char* str) {
+  char* curr = str;
+  fprintf(stdout, "convertToUpper intial: %s\n", curr);
+  for(curr; *curr != '\0'; curr++) {
+    *curr = toupper(*curr);
+  }
+
+  fprintf(stdout, "convertToUpper done: %s\n", str);
+  return str;
+}
+
+
 /* int main(int argc, char * argv[])
  * Main entry point to program nft.
  *
@@ -326,10 +343,10 @@ int main(int argc, char * argv[]){
    char* programName;
    char* buff;
 
-   int checkSumFlag = TRUE; 
-   int debugFlag = FALSE;
-   int fileTypeFlag = BINARY;
-   int readWriteFlag = SEQUENTIAL;
+   static int checkSumFlag = TRUE; 
+   static int debugFlag = FALSE;
+   static int fileTypeFlag = BINARY;
+   static int readWriteFlag = SEQUENTIAL;
    uint64_t buffersize = 0;
    uint64_t filesize = 0;
    char* path = NULL;
@@ -342,53 +359,82 @@ int main(int argc, char * argv[]){
    // loop through command line options. Set the appropriate flags
    // as needed. On exit of the loop, the optind will point to the
    // file passed, if there was one passed.
-   //while ((currentOption = getopt(argc, argv, "ly@:D:"))!= -1){
-   while ((currentOption = getopt(argc, argv, "hcrtb:f:d:"))!= -1){
-      switch(currentOption){
-         case 'h':
-            help();
-            break;
-         case 'c':
-            fprintf(stdout, "option -c passed \n");
-            checkSumFlag = FALSE;
-            break;
-	 case 'r':
-	    fprintf(stdout, "option -r passed \n");
-	    readWriteFlag = RANDOM;
-	    break;
-         case 't':
-            fprintf(stdout, "option -t passed \n");
-            fileTypeFlag = TEXT;
-            break;
+   static struct option longOptions[] = {
+     //{"binary",    no_argument, &fileTypeFlag, BINARY},
+     //{"text",      no_argument, &fileTypeFlag, TEXT},
+     {"blocksize", required_argument, 0, 'a'},
+     {"filesize",  required_argument, 0, 'b'},
+     {"directory", required_argument, 0, 'c'},
+     {"filetype",  required_argument, 0, 'd'},
+     //{"filename",  required_argument, 0, 'd'},
+     {"test",      required_argument, 0, 'e'},
+     {"checksum",  required_argument, 0, 'f'},
+     {"help",      no_argument,       0, 'g'},
+     {0, 0, 0, 0}
+   };
 
-         case 'b':
-            fprintf(stdout, "option -b passed with flag [%s]\n", optarg);
-            fprintf(stdout, "buffer size: %lu\n", convertStringToSize(optarg));
-	    buffersize = convertStringToSize(optarg);
-            break;
-         case 'f':
-            fprintf(stdout, "option -f passed with flag [%s]\n", optarg);
-	    fprintf(stdout, "file size: %lu\n", convertStringToSize(optarg));
-            filesize = convertStringToSize(optarg);
-            break;
-         case 'd':
-            fprintf(stdout, "option -d passed with flag [%s]\n", optarg);
-	    fprintf(stdout, "file path: %s\n", optarg);
-	    path = optarg;
-            break;
+   int retval = 0;
+   while (retval != -1) {
+     int optionIndex = 0;
+     retval = getopt_long_only(argc, argv, "", longOptions, &optionIndex);
+     
+     switch (retval) {
+       case -1:
+         break;
+       case 0:
+         fprintf(stdout, "case 0: optarg [%s]\n", optarg);
+         break;
+       case 'a':
+         //fprintf(stdout, "option -b passed with flag [%s]\n", optarg);
+         fprintf(stdout, "buffer size: %lu\n", convertStringToSize(optarg));
+	 buffersize = convertStringToSize(optarg);
+         break;
+       case 'b':
+         //fprintf(stdout, "option -f passed with flag [%s]\n", optarg);
+	 fprintf(stdout, "file size: %lu\n", convertStringToSize(optarg));
+         filesize = convertStringToSize(optarg);
+         break;
+       case 'c':
+         //fprintf(stdout, "option -d passed with flag [%s]\n", optarg);
+	 fprintf(stdout, "file path: %s\n", optarg);
+	 path = optarg;
+         break;
+       case 'd':
+	 fprintf(stdout, "file type: %s\n", optarg);
+         if(!strcmp("TEXT", convertToUpper(optarg))) {
+           fprintf(stdout, "file type changed to text.\n");
+           fileTypeFlag = TEXT;
+         }
+         else
+           usage();
 
-         case ':':
-            fprintf(stdout, "option case tripped [:]\n");
-            break;
-         case '?':
-            fprintf(stdout, "option case tripped [?]\n");
-            usage();
-            break;
-         default:
-            fprintf(stdout, "option case tripped [default]\n");
-            break;
+         break;
+       case 'e':
+	 fprintf(stdout, "type of test: %s\n", optarg);
+         if(!strcmp("RANDOM", convertToUpper(optarg))) {
+           fprintf(stdout, "switch to random read/write test \n");
+	   readWriteFlag = RANDOM;
+         }
+         else
+           usage();    
+
+	 break;
+       case 'f':
+	 fprintf(stdout, "checksum: %s\n", optarg);
+         if(!strcmp("OFF", convertToUpper(optarg))) {
+           fprintf(stdout, "turn off checksum \n");
+           checkSumFlag = FALSE;
+         }
+         else
+          usage();
+
+         break;
+       case 'g':
+          usage();
+          break;
       }
    }
+
 
 /*
    // simple usage check, verify there is at least a file passed.
