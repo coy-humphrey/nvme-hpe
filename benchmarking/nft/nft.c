@@ -334,6 +334,7 @@ int main(int argc, char * argv[]){
    uint64_t filesize = 0;
    char* path = NULL;
    uint32_t writeCheckSum;
+   uint32_t readchecksum;
 
    // set program name
    programName = basename(argv[0]);
@@ -414,8 +415,15 @@ int main(int argc, char * argv[]){
    printf("valid: %d\n", valid);
    free(buff);
 
-   uint32_t readchecksum = readCheckSum(buffersize, fileTypeFlag, path);
-   printf("read checksum value: %lu\n", readchecksum);
+   if(checkSumFlag) {
+     readchecksum = readCheckSum(buffersize, fileTypeFlag, path);
+     printf("read checksum value: %lu\n", readchecksum);
+   
+     if(writeCheckSum == readchecksum)
+       printf("Checksums match\n");
+     else
+       printf("Checksums don't match\n");
+   }
 
    // exit with success
    return SUCCESS;
