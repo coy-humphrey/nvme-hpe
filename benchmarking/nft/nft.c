@@ -93,9 +93,7 @@ static uint32_t crc32_tab[] = {
  * Print usage and exit with a failure
  */
 void usage(){
-   fprintf(stdout, "Invalid command \n");
-   fprintf(stdout, "Usage: \n");
-   fprintf(stdout, "       nft -help \n");
+   fprintf(stdout, "Usage: nft -help \n");
    exit(FAILURE);
 }
 
@@ -103,11 +101,28 @@ void usage(){
  * Print the available commands and how to use them.
  */
 void help() {
-  fprintf(stdout, "-filetype=text: Change file type to text. Set to binary by default. \n");
-  fprintf(stdout, "-checksum=off: Turn off checksum calculation. Set to be on by default. \n");
-  fprintf(stdout, "-directory: Specify directory path of where you want to save the file. \n");
-  fprintf(stdout, "-blocksize: Specify block size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
-  fprintf(stdout, "-filesize: Specify file size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
+  fprintf(stdout, "******************************************************************************\n");
+  fprintf(stdout, "                             nbdX file test\n");
+  fprintf(stdout, "******************************************************************************\n");
+  fprintf(stdout, "   -help                    This help text.\n");
+  fprintf(stdout, "   -test=[rr/rw/sr/sw]      Test to run:\n");
+  fprintf(stdout, "                            rr - random reads\n");
+  fprintf(stdout, "                            rw - random writes\n");
+  fprintf(stdout, "                            sr - sequential reads\n");
+  fprintf(stdout, "                            sw - sequential writes\n\n");
+  fprintf(stdout, "   -filetype=[text/binary]  Set to binary by default.\n");
+  fprintf(stdout, "   -checksum=[on/off]       Set to be on by default.\n");
+  fprintf(stdout, "   -directory=path          Set the target directory.\n\n");
+
+  fprintf(stdout, "   -blocksize=x[B/K/M/G]    Set the block size. Where x is "
+                  "greater than 0,\n                            "
+                  "followed by block size [Bytes/Kilo/Mega/Giga]\n\n");
+
+  fprintf(stdout, "   -filesize=x[B/K/M/G]     Set the file size. Where x is"
+                  "greater than 0,\n                            "
+                  "followed by file size [Bytes/Kilo/Mega/Giga]\n\n");
+
+  fprintf(stdout, "   Example: nft -blocksize=20k -filesize=20g -directory=/tmp\n");
   exit(SUCCESS);
 }
 
