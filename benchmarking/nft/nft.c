@@ -95,7 +95,7 @@ static uint32_t crc32_tab[] = {
 void usage(){
    fprintf(stdout, "Invalid command \n");
    fprintf(stdout, "Usage: \n");
-   fprintf(stdout, "       nft -h \n");
+   fprintf(stdout, "       nft -help \n");
    exit(FAILURE);
 }
 
@@ -103,9 +103,11 @@ void usage(){
  * Print the available commands and how to use them.
  */
 void help() {
-  fprintf(stdout, "-d: Specify directory path of where you want to save the file. \n");
-  fprintf(stdout, "-b: Specify block size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
-  fprintf(stdout, "-f: Specify file size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
+  fprintf(stdout, "-filetype=text: Change file type to text. Set to binary by default. \n");
+  fprintf(stdout, "-checksum=off: Turn off checksum calculation. Set to be on by default. \n");
+  fprintf(stdout, "-directory: Specify directory path of where you want to save the file. \n");
+  fprintf(stdout, "-blocksize: Specify block size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
+  fprintf(stdout, "-filesize: Specify file size greater than 0 followed by B, K, M, or G to create a buffer of a size in bytes, kilabytes, megabytes, or gigabytes respestively. Not case sensative. \n");
   exit(SUCCESS);
 }
 
@@ -430,7 +432,7 @@ int main(int argc, char * argv[]){
 
          break;
        case 'g':
-          usage();
+          help();
           break;
       }
    }
