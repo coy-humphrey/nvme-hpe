@@ -1,0 +1,7 @@
+IO Type,Blocksize,Number of Jobs,IO Depth,Data size,Duration,IO Engine,Read Bandwidth (KB/s),Read IOPS,Read Latency Min (ms),Read Latency Max (ms),Read Latency Avg (ms),Read Latency Dev (ms),Write Bandwidth (KB/s),Write IOPS,Write Latency Min (ms),Write Latency Max (ms),Write Latency Avg (ms),Write Latency Dev (ms),CPU Usage: User,CPU Usage: System
+read,1k,4,1,20G,10,libaio,44074,44074,19,740,22.144984,4.865275,0,0,0,0,0.000000,0.000000,5.410000%,23.230000%
+write,1k,4,1,20G,10,libaio,0,0,0,0,0.000000,0.000000,46708,46708,18,279,20.881327,4.399866,6.150000%,23.720000%
+randread,1k,4,1,20G,10,libaio,43333,43333,18,312,22.451781,4.711147,0,0,0,0,0.000000,0.000000,5.370000%,23.290000%
+randwrite,1k,4,1,20G,10,libaio,0,0,0,0,0.000000,0.000000,47542,47542,17,322,20.443213,4.368410,5.720000%,25.310000%
+rw,1k,4,1,20G,10,libaio,22875,22875,19,427,21.843954,4.469772,22811,22811,18,280,20.733913,4.465461,6.240000%,23.710000%
+randrw,1k,4,1,20G,10,libaio,22424,22424,17,283,22.218865,4.235463,22375,22375,18,379,21.172005,4.502532,6.410000%,23.280000%

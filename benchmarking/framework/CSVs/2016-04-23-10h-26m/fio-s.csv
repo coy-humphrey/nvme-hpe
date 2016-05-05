@@ -1,0 +1,22 @@
+IO Type,Blocksize,Number of Jobs,IO Depth,Data size,Duration,IO Engine,Read IOPS,Write IOPS
+read,1k,40,1,2G,10,libaio,397557,0
+read,1k,40,2,2G,10,libaio,401650,0
+read,1k,40,4,2G,10,libaio,409600,0
+read,4k,40,1,2G,10,libaio,256903,0
+read,4k,40,2,2G,10,libaio,226096,0
+read,4k,40,4,2G,10,libaio,204500,0
+read,8k,40,1,2G,10,libaio,153795,0
+read,8k,40,2,2G,10,libaio,141258,0
+read,8k,40,4,2G,10,libaio,153086,0
+read,1M,40,1,2G,10,libaio,1284,0
+read,1M,40,2,2G,10,libaio,815,0
+read,1M,40,4,2G,10,libaio,804,0
+read,10M,40,1,2G,10,libaio,58,0
+read,10M,40,2,2G,10,libaio,69,0
+read,10M,40,4,2G,10,libaio,58,0
+read,100M,40,1,2G,10,libaio,7,0
+read,100M,40,2,2G,10,libaio,5,0
+read,100M,40,4,2G,10,libaio,8,0
+read,1G,40,1,2G,10,libaio,0,0
+read,1G,40,2,2G,10,libaio,0,0
+read,1G,40,4,2G,10,libaio,0,0
