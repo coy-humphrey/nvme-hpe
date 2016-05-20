@@ -25,7 +25,7 @@ def run_t():
       ('-t', ['256', '512']),
       ('-R', ['']),
       ('--report_gbits', ['']),
-      ('--output=', ['bandwidth'])
+      ('--output=', ['latency'])
    ]
    framework.runBenchmarks()
 
@@ -50,7 +50,7 @@ def run_s():
       ('-R', ['']),
       ('tnvme40Gp1', ['']),
       ('--report_gbits', ['']),
-      ('--output=', ['bandwidth'])
+      ('--output=', ['latency'])
    ]
    framework.runBenchmarks() 
 
