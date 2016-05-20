@@ -19,7 +19,7 @@ def run_t():
    framework.waitTime = 0.5
    framework.headerNames = ['Duration in Seconds (-D)', 
                             'TxDepth (-t)']
-   framework.outputHeaders = ['Bandwidth in Gb/s']
+   framework.outputHeaders = ['Latency in ms']
    framework.params = [
       ('-D', ['1', '3', '5']),
       ('-t', ['256', '512']),
@@ -43,7 +43,7 @@ def run_s():
    framework.outputParser = parse
    framework.headerNames = ['Duration in Seconds (-D)', 
                             'TxDepth (-t)']
-   framework.outputHeaders = ['Bandwidth in Gb/s']
+   framework.outputHeaders = ['Latency in ms']
    framework.params = [
       ('-D', ['1', '3', '5']),
       ('-t', ['256', '512']),
