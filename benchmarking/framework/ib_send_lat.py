@@ -12,7 +12,7 @@ def run_t():
 
    framework = Framework()
    
-   framework.command = "ib_send_bw"
+   framework.command = "ib_send_lat"
    framework.numRuns = 3
    framework.isClient = False
    framework.outputParser = parse
@@ -37,7 +37,7 @@ def run_s():
 
    framework = Framework()
    
-   framework.command = "ib_send_bw"
+   framework.command = "ib_send_lat"
    framework.numRuns = 3
    framework.isClient = True
    framework.outputParser = parse
