@@ -86,7 +86,7 @@ def run():
       ('--group_reporting', ['']),
       ('--exitall', ['']),
       ('--name=', ['task1']),
-      ('--direct=', ['1']),
+      #('--direct=', ['1']),
       ('--directory=', [Framework.ramDiskPath]),
    ]
    framework.outputHeaders = [
