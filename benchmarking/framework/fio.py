@@ -99,10 +99,10 @@ def run():
 
       'Write Bandwidth (KB/s)',
       'Write IOPS',
-      'Write Latency Min (ms)',
-      'Write Latency Max (ms)',
-      'Write Latency Avg (ms)',
-      'Write Latency Dev (ms)',
+      'Write Latency Min (us)',
+      'Write Latency Max (us)',
+      'Write Latency Avg (us)',
+      'Write Latency Dev (us)',
 
       'CPU Usage: User',
       'CPU Usage: System',
