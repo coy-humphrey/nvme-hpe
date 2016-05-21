@@ -1,4 +1,4 @@
-IO Type,Blocksize,Number of Jobs,IO Depth,Data size,Duration,IO Engine,Read Bandwidth (KB/s),Read IOPS,Read Latency Min (ms),Read Latency Max (ms),Read Latency Avg (ms),Read Latency Dev (ms),Write Bandwidth (KB/s),Write IOPS,Write Latency Min (ms),Write Latency Max (ms),Write Latency Avg (ms),Write Latency Dev (ms),CPU Usage: User,CPU Usage: System
+IO Type,Blocksize,Number of Jobs,IO Depth,Data size,Duration,IO Engine,Read Bandwidth (KB/s),Read IOPS,Read Latency Min (us),Read Latency Max (us),Read Latency Avg (us),Read Latency Dev (us),Write Bandwidth (KB/s),Write IOPS,Write Latency Min (us),Write Latency Max (us),Write Latency Avg (us),Write Latency Dev (us),CPU Usage: User,CPU Usage: System
 read,4k,1,1,40G,10,libaio,1859178,464794,1,294,1.450196,1.088436,0,0,0,0,0.000000,0.000000,14.540000%,85.280000%
 read,4k,1,32,40G,10,libaio,1895359,473839,2,282,50.633680,4.666277,0,0,0,0,0.000000,0.000000,15.160000%,84.680000%
 read,4k,1,64,40G,10,libaio,1692429,423107,3,436,113.544466,8.059435,0,0,0,0,0.000000,0.000000,13.400000%,86.450000%
